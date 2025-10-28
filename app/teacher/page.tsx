@@ -98,7 +98,7 @@ export default function TeacherPage() {
 
           {result && (
             <div className="rounded-xl bg-white p-6 shadow-md border border-gray-200">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between md:flex-row flex-col gap-4">
                 <div>
                   <div className="text-sm text-gray-500">Shareable link</div>
                   <div className="mt-1 font-medium text-gray-800">
