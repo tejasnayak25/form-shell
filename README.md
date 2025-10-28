@@ -40,13 +40,13 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 Custom additions for this workspace (form-shell):
 
 - `lib/sanitize.ts` - utility to extract URL from pasted embed HTML or raw URL.
-- `app/api/createLink/route.ts` - API to create short id for a sanitized URL and store in `data/links.json`.
+- `app/api/createLink/route.ts` - API to create short id for a sanitized URL and store in Firestore at `rootCollection/useremail/forms/${doc}`.
 - `app/api/logEvent/route.ts` - API to accept anti-cheat events and append to `data/logs.json`.
 - `app/teacher/page.tsx` - teacher UI to paste embed code and create link.
 - `app/form/[id]/page.tsx` - student page which embeds the external URL and logs visibility/blur events.
 - `lib/firebaseClient.ts` - minimal firebase helper (placeholder). Update with your Firebase config.
- - `app/teacher/dashboard/page.tsx` - teacher dashboard to list and delete links created by the signed-in teacher.
- - `app/api/teacher/links` - API endpoints to list and delete teacher links (prototype uses JSON file storage).
+- `app/teacher/dashboard/page.tsx` - teacher dashboard to list and delete links created by the signed-in teacher.
+- `app/api/teacher/links` - API endpoints to list and delete teacher links (now uses Firestore instead of JSON file storage).
 
 How to run locally
 

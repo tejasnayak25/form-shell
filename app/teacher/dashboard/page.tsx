@@ -29,7 +29,7 @@ export default function TeacherDashboard() {
   useEffect(() => {
     if (!user) return;
     async function load() {
-      const res = await fetch('/api/teacher/links');
+      const res = await fetch(`/api/${user.email}/list-links`);
       if (!res.ok) {
         setError('Could not load links');
         return;
