@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { db, rootCollection } from '@/lib/firebase';
 
-export async function GET(_req: Request, { params } : { params: { id: string; } }) {
+export async function GET(_req: Request, { params } : { params: Promise<{ id: string; }> }) {
     try {
         const rawId = (await params).id;
         const id = Array.isArray(rawId) ? rawId[0] : rawId;

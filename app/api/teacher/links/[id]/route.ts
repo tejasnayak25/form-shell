@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { db, rootCollection } from '@/lib/firebase';
 
-export async function DELETE(_req: Request, { params } : { params: { id: string; } }) {
+export async function DELETE(_req: Request, { params } : { params: Promise<{ id: string; }> }) {
   try {
     const id:any = (await params).id;
     const docRef = rootCollection.doc("system").collection('forms').doc(id);

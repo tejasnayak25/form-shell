@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { db, rootCollection } from '@/lib/firebase';
 
-export async function GET(req: Request, { params } : { params: {teacher: string} }) {
+export async function GET(req: Request, { params } : { params: Promise<{ teacher: string; }> }) {
   try {
     const email = (await params).teacher;
 
