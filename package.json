@@ -11,6 +11,8 @@
   "dependencies": {
     "@headlessui/react": "^2.2.9",
     "@types/firebase": "^2.4.32",
+    "@mediapipe/camera_utils": "^0.3.1675466862",
+    "@mediapipe/pose": "^0.5.1675469404",
     "firebase": "^12.4.0",
     "firebase-admin": "^13.5.0",
     "lucide-react": "^0.548.0",

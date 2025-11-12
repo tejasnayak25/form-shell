@@ -1,1160 +1,1417 @@
 [
   {
-    "type": "blur",
-    "time": "2025-10-27T12:30:32.057Z"
-  },
-  {
+    "id": "visibility-1762967060054-45ee",
     "type": "visibility",
+    "severity": "warning",
+    "studentEmail": "gamingbattleelite098@gmail.com",
     "hidden": true,
-    "time": "2025-10-27T12:30:32.612Z"
-  },
-  {
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:30:48.913Z"
-  },
-  {
-    "type": "blur",
-    "time": "2025-10-27T12:30:53.421Z"
-  },
-  {
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:30:54.894Z"
-  },
-  {
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:34:08.400Z"
-  },
-  {
-    "type": "blur",
-    "time": "2025-10-27T12:34:15.946Z"
-  },
-  {
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:34:17.917Z"
-  },
-  {
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:34:29.528Z"
-  },
-  {
-    "type": "blur",
-    "time": "2025-10-27T12:34:31.333Z"
-  },
-  {
-    "type": "blur",
-    "time": "2025-10-27T12:34:33.326Z"
-  },
-  {
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:34:34.354Z"
-  },
-  {
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:34:46.472Z"
-  },
-  {
-    "type": "blur",
-    "time": "2025-10-27T12:34:47.970Z"
-  },
-  {
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:34:47.985Z"
-  },
-  {
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:34:48.110Z"
-  },
-  {
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:35:04.955Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:37:33.438Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:37:40.532Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:37:58.994Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:38:07.770Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:38:21.265Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:38:23.080Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:39:04.692Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:39:06.291Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:39:43.507Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:39:45.562Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:39:47.080Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:39:57.387Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:40:03.614Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:40:08.860Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:41:30.076Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "blur",
-    "time": "2025-10-27T12:46:10.508Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:46:11.630Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:46:26.368Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "blur",
-    "time": "2025-10-27T12:46:28.084Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:46:28.096Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:47:04.767Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "blur",
-    "time": "2025-10-27T12:47:06.904Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:47:07.785Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:47:22.617Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "blur",
-    "time": "2025-10-27T12:47:25.815Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:47:26.869Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:47:57.601Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "blur",
-    "time": "2025-10-27T12:48:00.357Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:48:01.253Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:48:26.291Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "blur",
-    "time": "2025-10-27T12:48:27.454Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:48:27.469Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:48:30.980Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "blur",
-    "time": "2025-10-27T12:48:33.275Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:48:33.296Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:48:47.743Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "blur",
-    "time": "2025-10-27T12:48:48.546Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:48:48.591Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:48:49.902Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "blur",
-    "time": "2025-10-27T12:48:51.355Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:48:52.321Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:49:07.138Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "blur",
-    "time": "2025-10-27T12:49:08.769Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:49:08.785Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:49:09.966Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "blur",
-    "time": "2025-10-27T12:49:10.773Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:49:10.789Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:50:46.443Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "blur",
-    "time": "2025-10-27T12:50:56.041Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:50:56.289Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:51:38.495Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:51:47.863Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:53:05.378Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:53:16.141Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:53:35.317Z"
-  },
-  {
-    "id": "f2k074z",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:53:44.518Z"
-  },
-  {
-    "id": "f2k074z",
+    "message": "Tab hidden during attempt",
+    "metadata": {
+      "hidden": true
+    },
+    "time": "2025-11-12T17:04:20.082Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "heartbeat-1762968609853-5239",
+    "type": "heartbeat",
+    "severity": "info",
     "studentEmail": null,
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:54:03.512Z"
+    "message": "Form session initialized",
+    "metadata": {
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSd85N2upcBUoyDPj8_F6roiHUDwFK6OlYQJPFs4Ra1bP4Xrow/viewform?usp=header"
+    },
+    "time": "2025-11-12T17:30:10.076Z"
   },
   {
-    "id": "f2k074z",
+    "formId": "8be4008",
+    "id": "blur-1762968610350-a870",
+    "type": "blur",
+    "severity": "warning",
     "studentEmail": null,
-    "type": "blur",
-    "time": "2025-10-27T12:54:08.468Z"
+    "message": "Window lost focus",
+    "metadata": {},
+    "time": "2025-11-12T17:30:10.369Z"
   },
   {
-    "id": "f2k074z",
+    "formId": "8be4008",
+    "id": "heartbeat-1762968627008-e396",
+    "type": "heartbeat",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Form session initialized",
+    "metadata": {
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSd85N2upcBUoyDPj8_F6roiHUDwFK6OlYQJPFs4Ra1bP4Xrow/viewform?usp=header&student_email=nandannaik456%40gmail.com"
+    },
+    "time": "2025-11-12T17:30:27.049Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "blur-1762968627419-38d1",
+    "type": "blur",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Window lost focus",
+    "metadata": {},
+    "time": "2025-11-12T17:30:27.453Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "blur-1762968636317-0b47",
+    "type": "blur",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Window lost focus",
+    "metadata": {},
+    "time": "2025-11-12T17:30:36.338Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "blur-1762968636527-b79d",
+    "type": "blur",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Window lost focus",
+    "metadata": {},
+    "time": "2025-11-12T17:30:36.551Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968664731-e732",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9999537865320841,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:31:04.745Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968669759-4c72",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9998065829277039,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:31:09.771Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "blur-1762968670669-abbe",
+    "type": "blur",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Window lost focus",
+    "metadata": {},
+    "time": "2025-11-12T17:31:10.689Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968674792-ef2c",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9992542664210001,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:31:14.803Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968679809-24af",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9993527134259542,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:31:19.824Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968684838-4c6b",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9981393019358317,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:31:24.849Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968689868-e148",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9976637760798136,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:31:29.881Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968694904-14d0",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9998448491096497,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:31:34.916Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968699939-5c78",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9996801217397054,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:31:39.951Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968704972-f3bb",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9993223150571188,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:31:44.985Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968710008-499d",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9993493954340616,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:31:50.018Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968715036-1500",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9993600447972616,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:31:55.050Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968720054-e5c1",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9996374845504761,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:32:00.065Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968725081-9ba2",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9992842674255371,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:32:05.094Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968730109-8b90",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9994338750839233,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:32:10.121Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968735141-65e6",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9983490109443665,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:32:15.153Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968740174-2b95",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9993205467859904,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:32:20.186Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968745204-f506",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9996018211046854,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:32:25.216Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968750236-9675",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9995329777399699,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:32:30.248Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "visibility-1762968754306-8430",
+    "type": "visibility",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "hidden": true,
+    "message": "Tab hidden during attempt",
+    "metadata": {
+      "hidden": true
+    },
+    "time": "2025-11-12T17:32:34.331Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "visibility-1762968768636-e5e3",
+    "type": "visibility",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "hidden": false,
+    "message": "Tab visibility restored",
+    "metadata": {
+      "hidden": false
+    },
+    "time": "2025-11-12T17:32:48.658Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968768763-6abf",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9994458754857382,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:32:48.781Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968773811-4834",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9998382329940796,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:32:53.822Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968778840-7ca8",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9998093048731486,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:32:58.852Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968783874-ab63",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.999853273232778,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:33:03.884Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968788909-67a7",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9999366998672485,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:33:08.922Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968793943-6d60",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9999188582102457,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:33:13.953Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968798975-1bed",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9994863271713257,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:33:18.991Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968804010-3bd8",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9972051978111267,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:33:24.021Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968809022-b480",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9999790589014689,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:33:29.035Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968812072-a535",
+    "type": "pose",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Please face the camera directly.",
+    "metadata": {
+      "confidence": 0.9996688365936279,
+      "faceVisible": false,
+      "flagged": true
+    },
+    "time": "2025-11-12T17:33:32.086Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968812257-ecea",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9994823535283407,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:33:32.270Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968812440-16ea",
+    "type": "pose",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Please face the camera directly.",
+    "metadata": {
+      "confidence": 0.9992176493008932,
+      "faceVisible": false,
+      "flagged": true
+    },
+    "time": "2025-11-12T17:33:32.450Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968812507-e501",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9991652965545654,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:33:32.528Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968812560-35d7",
+    "type": "pose",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Please face the camera directly.",
+    "metadata": {
+      "confidence": 0.9991048773129781,
+      "faceVisible": false,
+      "flagged": true
+    },
+    "time": "2025-11-12T17:33:32.588Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968812627-3556",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9990495840708414,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:33:32.646Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968814242-499c",
+    "type": "pose",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Please face the camera directly.",
+    "metadata": {
+      "confidence": 0.9995575348536173,
+      "faceVisible": false,
+      "flagged": true
+    },
+    "time": "2025-11-12T17:33:34.254Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968814589-6f31",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9996932744979858,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:33:34.598Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968814889-6b5d",
+    "type": "pose",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Please face the camera directly.",
+    "metadata": {
+      "confidence": 0.9997469782829285,
+      "faceVisible": false,
+      "flagged": true
+    },
+    "time": "2025-11-12T17:33:34.900Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968815009-26f3",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9997807343800863,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:33:35.020Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968815085-5835",
+    "type": "pose",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Please face the camera directly.",
+    "metadata": {
+      "confidence": 0.9997965097427368,
+      "faceVisible": false,
+      "flagged": true
+    },
+    "time": "2025-11-12T17:33:35.095Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968815558-26f6",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9998335043589274,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:33:35.572Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968815627-cfcc",
+    "type": "pose",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Please face the camera directly.",
+    "metadata": {
+      "confidence": 0.9998134175936381,
+      "faceVisible": false,
+      "flagged": true
+    },
+    "time": "2025-11-12T17:33:35.675Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968815791-4c58",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9997875690460205,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:33:35.802Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968815852-6bad",
+    "type": "pose",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Please face the camera directly.",
+    "metadata": {
+      "confidence": 0.9997902313868204,
+      "faceVisible": false,
+      "flagged": true
+    },
+    "time": "2025-11-12T17:33:35.865Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968815974-d39c",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9997817277908325,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:33:35.986Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968816142-6d33",
+    "type": "pose",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Please face the camera directly.",
+    "metadata": {
+      "confidence": 0.9997526009877523,
+      "faceVisible": false,
+      "flagged": true
+    },
+    "time": "2025-11-12T17:33:36.151Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968816696-75da",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9998022516568502,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:33:36.707Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968816921-37e3",
+    "type": "pose",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Please face the camera directly.",
+    "metadata": {
+      "confidence": 0.9998304645220438,
+      "faceVisible": false,
+      "flagged": true
+    },
+    "time": "2025-11-12T17:33:36.931Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968817002-105f",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9998296101888021,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:33:37.014Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968821610-18be",
+    "type": "pose",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Please face the camera directly.",
+    "metadata": {
+      "confidence": 0.9993489782015482,
+      "faceVisible": false,
+      "flagged": true
+    },
+    "time": "2025-11-12T17:33:41.620Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968823991-49cb",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9969374140103658,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:33:44.003Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968824889-be49",
+    "type": "pose",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Please face the camera directly.",
+    "metadata": {
+      "confidence": 0.9988267223040262,
+      "faceVisible": false,
+      "flagged": true
+    },
+    "time": "2025-11-12T17:33:44.900Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968825744-3dd6",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9977825880050659,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:33:45.754Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968826574-ecbe",
+    "type": "pose",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Please face the camera directly.",
+    "metadata": {
+      "confidence": 0.9990177353223165,
+      "faceVisible": false,
+      "flagged": true
+    },
+    "time": "2025-11-12T17:33:46.584Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968827526-7600",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.995690107345581,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:33:47.537Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968827604-00fa",
+    "type": "pose",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Please face the camera directly.",
+    "metadata": {
+      "confidence": 0.9960045218467712,
+      "faceVisible": false,
+      "flagged": true
+    },
+    "time": "2025-11-12T17:33:47.629Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968827658-9ecf",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9962875247001648,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:33:47.681Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968830478-0e22",
+    "type": "pose",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Please face the camera directly.",
+    "metadata": {
+      "confidence": 0.9993582367897034,
+      "faceVisible": false,
+      "flagged": true
+    },
+    "time": "2025-11-12T17:33:50.489Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968831475-5fdc",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9935624003410339,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:33:51.486Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968836508-8127",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9996729691823324,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:33:56.518Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968841539-a00c",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9999594489733378,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:34:01.548Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968846574-359b",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.999935249487559,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:34:06.585Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968851608-fadd",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9997167189915975,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:34:11.619Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "visibility-1762968853672-8307",
+    "type": "visibility",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "hidden": true,
+    "message": "Tab hidden during attempt",
+    "metadata": {
+      "hidden": true
+    },
+    "time": "2025-11-12T17:34:13.699Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "visibility-1762968854492-e7c1",
+    "type": "visibility",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "hidden": false,
+    "message": "Tab visibility restored",
+    "metadata": {
+      "hidden": false
+    },
+    "time": "2025-11-12T17:34:14.512Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968856645-959a",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9998273452123007,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:34:16.657Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "blur-1762968859912-ee6a",
+    "type": "blur",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Window lost focus",
+    "metadata": {},
+    "time": "2025-11-12T17:34:19.924Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "blur-1762968860039-3371",
+    "type": "blur",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Window lost focus",
+    "metadata": {},
+    "time": "2025-11-12T17:34:20.055Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968861687-3461",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9998380541801453,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:34:21.696Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968866723-59ee",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9997827609380087,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:34:26.737Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "visibility-1762968880526-8326",
+    "type": "visibility",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "hidden": true,
+    "message": "Tab hidden during attempt",
+    "metadata": {
+      "hidden": true
+    },
+    "time": "2025-11-12T17:34:40.563Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "duplicate-1762968881067-c96f",
+    "type": "duplicate",
+    "severity": "critical",
     "studentEmail": null,
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:54:08.491Z"
+    "message": "Multiple concurrent attempts detected",
+    "metadata": {
+      "key": "form-shell-session-8be4008"
+    },
+    "time": "2025-11-12T17:34:41.088Z"
   },
   {
-    "id": "f2k074z",
+    "formId": "8be4008",
+    "id": "heartbeat-1762968881163-36b0",
+    "type": "heartbeat",
+    "severity": "info",
     "studentEmail": null,
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:54:09.880Z"
+    "message": "Form session initialized",
+    "metadata": {
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSd85N2upcBUoyDPj8_F6roiHUDwFK6OlYQJPFs4Ra1bP4Xrow/viewform?usp=header"
+    },
+    "time": "2025-11-12T17:34:41.178Z"
   },
   {
-    "id": "f2k074z",
+    "formId": "8be4008",
+    "id": "heartbeat-1762968881993-473e",
+    "type": "heartbeat",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Form session initialized",
+    "metadata": {
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSd85N2upcBUoyDPj8_F6roiHUDwFK6OlYQJPFs4Ra1bP4Xrow/viewform?usp=header&student_email=nandannaik456%40gmail.com"
+    },
+    "time": "2025-11-12T17:34:42.110Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "blur-1762968899278-be55",
+    "type": "blur",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Window lost focus",
+    "metadata": {},
+    "time": "2025-11-12T17:34:59.291Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "blur-1762968899395-4a3f",
+    "type": "blur",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Window lost focus",
+    "metadata": {},
+    "time": "2025-11-12T17:34:59.413Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968913300-1ab4",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9998663266499838,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:35:13.321Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968918321-ff39",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9998811284701029,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:35:18.331Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968921324-ebb9",
+    "type": "pose",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Please face the camera directly.",
+    "metadata": {
+      "confidence": 0.9999029040336609,
+      "faceVisible": false,
+      "flagged": true
+    },
+    "time": "2025-11-12T17:35:21.335Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968921493-f8bb",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9998959501584371,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:35:21.506Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968926527-1213",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9998533527056376,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:35:26.537Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968930426-b7ee",
+    "type": "pose",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Please face the camera directly.",
+    "metadata": {
+      "confidence": 0.9985912243525187,
+      "faceVisible": false,
+      "flagged": true
+    },
+    "time": "2025-11-12T17:35:30.438Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968930545-2b7d",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9963871240615845,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:35:30.558Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968930666-6b28",
+    "type": "pose",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Please face the camera directly.",
+    "metadata": {
+      "confidence": 0.9969273805618286,
+      "faceVisible": false,
+      "flagged": true
+    },
+    "time": "2025-11-12T17:35:30.677Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968933428-caa4",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9996709624926249,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:35:33.439Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "pose-1762968938445-5d82",
+    "type": "pose",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Pose verification stable",
+    "metadata": {
+      "confidence": 0.9997478922208151,
+      "faceVisible": true,
+      "flagged": false
+    },
+    "time": "2025-11-12T17:35:38.456Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "blur-1762968941867-d1e1",
+    "type": "blur",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Window lost focus",
+    "metadata": {},
+    "time": "2025-11-12T17:35:41.881Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "blur-1762968941969-773f",
+    "type": "blur",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Window lost focus",
+    "metadata": {},
+    "time": "2025-11-12T17:35:41.991Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "blur-1762968983574-3f67",
+    "type": "blur",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Window lost focus",
+    "metadata": {},
+    "time": "2025-11-12T17:36:23.589Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "blur-1762968983693-93d4",
+    "type": "blur",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Window lost focus",
+    "metadata": {},
+    "time": "2025-11-12T17:36:23.708Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "duplicate-1762969073494-64af",
+    "type": "duplicate",
+    "severity": "critical",
     "studentEmail": null,
-    "type": "blur",
-    "time": "2025-10-27T12:54:15.445Z"
+    "message": "Multiple concurrent attempts detected",
+    "metadata": {
+      "key": "form-shell-session-8be4008"
+    },
+    "time": "2025-11-12T17:37:54.351Z"
   },
   {
-    "id": "f2k074z",
+    "formId": "8be4008",
+    "id": "blur-1762969075411-0f9c",
+    "type": "blur",
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Window lost focus",
+    "metadata": {},
+    "time": "2025-11-12T17:37:55.456Z"
+  },
+  {
+    "formId": "8be4008",
+    "id": "heartbeat-1762969075915-4cf6",
+    "type": "heartbeat",
+    "severity": "info",
     "studentEmail": null,
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:54:15.497Z"
+    "message": "Form session initialized",
+    "metadata": {
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSd85N2upcBUoyDPj8_F6roiHUDwFK6OlYQJPFs4Ra1bP4Xrow/viewform?usp=header"
+    },
+    "time": "2025-11-12T17:37:55.931Z"
   },
   {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:54:25.581Z"
+    "formId": "8be4008",
+    "id": "heartbeat-1762969076069-ed5e",
+    "type": "heartbeat",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Form session initialized",
+    "metadata": {
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSd85N2upcBUoyDPj8_F6roiHUDwFK6OlYQJPFs4Ra1bP4Xrow/viewform?usp=header&student_email=nandannaik456%40gmail.com"
+    },
+    "time": "2025-11-12T17:37:56.194Z"
   },
   {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
+    "formId": "8be4008",
+    "id": "blur-1762969088406-5b4d",
     "type": "blur",
-    "time": "2025-10-27T12:54:28.900Z"
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Window lost focus",
+    "metadata": {},
+    "time": "2025-11-12T17:38:08.422Z"
   },
   {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:54:28.927Z"
-  },
-  {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:54:31.863Z"
-  },
-  {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
+    "formId": "8be4008",
+    "id": "blur-1762969088518-8ff3",
     "type": "blur",
-    "time": "2025-10-27T12:54:47.709Z"
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Window lost focus",
+    "metadata": {},
+    "time": "2025-11-12T17:38:08.537Z"
   },
   {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:54:47.752Z"
-  },
-  {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T12:55:06.141Z"
-  },
-  {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-27T12:55:07.715Z"
-  },
-  {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T12:55:07.726Z"
-  },
-  {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T13:01:48.234Z"
-  },
-  {
-    "id": "f2k074z",
+    "formId": "8be4008",
+    "id": "duplicate-1762969644027-6eec",
+    "type": "duplicate",
+    "severity": "critical",
     "studentEmail": null,
-    "type": "blur",
-    "time": "2025-10-27T13:01:59.144Z"
+    "message": "Multiple concurrent attempts detected",
+    "metadata": {
+      "key": "form-shell-session-8be4008"
+    },
+    "time": "2025-11-12T17:47:24.375Z"
   },
   {
-    "id": "f2k074z",
+    "formId": "8be4008",
+    "id": "heartbeat-1762969645752-b940",
+    "type": "heartbeat",
+    "severity": "info",
     "studentEmail": null,
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T13:01:59.169Z"
+    "message": "Form session initialized",
+    "metadata": {
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSd85N2upcBUoyDPj8_F6roiHUDwFK6OlYQJPFs4Ra1bP4Xrow/viewform?usp=header"
+    },
+    "time": "2025-11-12T17:47:25.777Z"
   },
   {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T13:02:32.513Z"
+    "formId": "8be4008",
+    "id": "heartbeat-1762969645861-e92a",
+    "type": "heartbeat",
+    "severity": "info",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Form session initialized",
+    "metadata": {
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSd85N2upcBUoyDPj8_F6roiHUDwFK6OlYQJPFs4Ra1bP4Xrow/viewform?usp=header&student_email=nandannaik456%40gmail.com"
+    },
+    "time": "2025-11-12T17:47:25.891Z"
   },
   {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
+    "formId": "8be4008",
+    "id": "blur-1762969646111-a317",
     "type": "blur",
-    "time": "2025-10-27T13:02:34.371Z"
-  },
-  {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-27T13:02:53.764Z"
-  },
-  {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T13:02:53.784Z"
-  },
-  {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T13:02:53.871Z"
-  },
-  {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-27T13:03:02.643Z"
-  },
-  {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T13:03:50.353Z"
-  },
-  {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T13:04:12.251Z"
-  },
-  {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T13:04:18.009Z"
-  },
-  {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T13:48:06.549Z"
-  },
-  {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T13:48:10.843Z"
-  },
-  {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T13:49:40.218Z"
-  },
-  {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T13:49:41.855Z"
-  },
-  {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T13:50:40.148Z"
-  },
-  {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T13:50:41.707Z"
-  },
-  {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T13:51:40.867Z"
-  },
-  {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T13:51:43.612Z"
-  },
-  {
-    "id": "f2k074z",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T13:51:45.202Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-27T15:11:03.788Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T15:11:32.297Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T15:11:36.838Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T15:11:37.711Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-27T15:17:59.583Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T15:18:12.908Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T15:18:22.111Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T15:18:23.607Z"
-  },
-  {
-    "id": "vaohh0o",
-    "studentEmail": null,
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T15:21:25.631Z"
-  },
-  {
-    "id": "vaohh0o",
-    "studentEmail": null,
-    "type": "blur",
-    "time": "2025-10-27T15:21:25.665Z"
-  },
-  {
-    "id": "oqcxo0f",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-27T15:39:30.944Z"
-  },
-  {
-    "id": "oqcxo0f",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T15:39:38.576Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-27T15:39:59.341Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T15:40:05.325Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-27T15:40:11.319Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-27T15:40:23.583Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-28T04:10:44.750Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-28T04:11:07.651Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-28T04:16:42.384Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-28T04:16:46.153Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-28T04:19:43.683Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-28T04:19:45.638Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-28T04:19:49.659Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-28T04:20:00.043Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-28T04:20:02.098Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-28T04:20:11.477Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-28T04:20:24.709Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-28T04:20:33.169Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-28T04:20:33.200Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-28T04:20:38.011Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-28T04:20:54.333Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-28T04:21:01.141Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-28T04:21:48.414Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-28T04:21:52.399Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-28T04:22:20.329Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-28T04:22:22.089Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-28T04:22:23.658Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-28T04:22:29.233Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-28T04:23:02.185Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-28T04:23:11.392Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-28T04:23:11.630Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-28T04:23:30.252Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-28T04:23:34.453Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-28T04:23:35.795Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-28T04:23:41.846Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-28T04:23:56.765Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-28T04:23:56.803Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-28T04:24:00.133Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-28T04:24:07.583Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-28T04:25:35.193Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-28T04:25:39.463Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-28T04:25:44.059Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-28T04:25:48.703Z"
-  },
-  {
-    "id": "p88694y",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-28T04:25:50.404Z"
-  },
-  {
-    "id": "r4lhwb7",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-28T04:26:09.130Z"
-  },
-  {
-    "id": "r4lhwb7",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-28T04:26:09.141Z"
-  },
-  {
-    "id": "r4lhwb7",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-28T04:26:14.163Z"
-  },
-  {
-    "id": "r4lhwb7",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-28T04:26:22.287Z"
-  },
-  {
-    "id": "r4lhwb7",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-28T04:26:22.301Z"
-  },
-  {
-    "id": "r4lhwb7",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-28T04:26:49.103Z"
-  },
-  {
-    "id": "r4lhwb7",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-28T04:26:57.398Z"
-  },
-  {
-    "id": "r4lhwb7",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-28T04:26:57.436Z"
-  },
-  {
-    "id": "r4lhwb7",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-28T04:27:26.152Z"
-  },
-  {
-    "id": "r4lhwb7",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-28T04:27:33.088Z"
-  },
-  {
-    "id": "r4lhwb7",
-    "studentEmail": null,
-    "type": "blur",
-    "time": "2025-10-28T04:27:53.301Z"
-  },
-  {
-    "id": "r4lhwb7",
-    "studentEmail": "tejas.23cs173@sode-edu.in",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-28T04:28:11.111Z"
-  },
-  {
-    "id": "r4lhwb7",
-    "studentEmail": "tejas.23cs173@sode-edu.in",
-    "type": "blur",
-    "time": "2025-10-28T04:28:11.141Z"
-  },
-  {
-    "id": "r4lhwb7",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-28T04:28:11.192Z"
-  },
-  {
-    "id": "r4lhwb7",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-28T04:28:12.922Z"
-  },
-  {
-    "id": "r4lhwb7",
-    "studentEmail": null,
-    "type": "blur",
-    "time": "2025-10-28T06:44:22.883Z"
-  },
-  {
-    "id": "r4lhwb7",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-28T06:44:31.367Z"
-  },
-  {
-    "id": "r4lhwb7",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-28T06:58:37.746Z"
-  },
-  {
-    "id": "r4lhwb7",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-28T06:58:39.068Z"
-  },
-  {
-    "id": "r4lhwb7",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-28T06:58:39.087Z"
-  },
-  {
-    "id": "r4lhwb7",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": false,
-    "time": "2025-10-28T07:02:19.487Z"
-  },
-  {
-    "id": "r4lhwb7",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "visibility",
-    "hidden": true,
-    "time": "2025-10-28T07:02:22.383Z"
-  },
-  {
-    "id": "r4lhwb7",
-    "studentEmail": "arpithanayak900@gmail.com",
-    "type": "blur",
-    "time": "2025-10-28T07:02:22.413Z"
+    "severity": "warning",
+    "studentEmail": "nandannaik456@gmail.com",
+    "message": "Window lost focus",
+    "metadata": {},
+    "time": "2025-11-12T17:47:26.132Z"
   }
 ]
