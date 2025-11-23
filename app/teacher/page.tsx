@@ -1,8 +1,44 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { initFirebaseFromEnv, googleSignIn, onAuthChange } from '../../lib/firebaseClient';
-import { Check, Copy, ExternalLink, LayoutGrid, Link, LogIn } from 'lucide-react';
+import { Check, Copy, ExternalLink, LayoutGrid, Link, LogIn, X, Loader2 } from 'lucide-react';
+
+// Loading animation component
+function LoadingSpinner() {
+  return (
+    <div className="flex flex-col items-center justify-center p-8 space-y-4">
+      <Loader2 className="w-12 h-12 text-blue-600 animate-spin" />
+      <p className="text-gray-600 text-sm">Creating your link...</p>
+    </div>
+  );
+}
+
+// Popup component for validation errors
+function ErrorPopup({ message, onClose }: { message: string; onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-lg font-semibold text-gray-800">Validation Error</h3>
+          <button
+            onClick={onClose}
+            className="text-gray-400 hover:text-gray-600 transition"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+        <p className="text-gray-600 mb-4">{message}</p>
+        <button
+          onClick={onClose}
+          className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+        >
+          OK
+        </button>
+      </div>
+    </div>
+  );
+}
 
 export default function TeacherPage() {
   useEffect(() => {
@@ -11,7 +47,11 @@ export default function TeacherPage() {
   const [input, setInput] = useState('');
   const [result, setResult] = useState<null | { id: string; url: string }>(null);
   const [error, setError] = useState<string | null>(null);
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState<any | null>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const unsub = onAuthChange((u) => setUser(u));
@@ -20,19 +60,73 @@ export default function TeacherPage() {
 
   async function createLink() {
     setError(null);
-    const payload: any = { input };
-    if (user?.email) payload.teacher = user.email;
-    const res = await fetch('/api/createLink', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
-    const data = await res.json();
-    if (!res.ok) {
-      setError(data.error || 'Unknown error');
+    setShowErrorPopup(false);
+    setResult(null);
+    
+    // Validate input
+    if (!input || !input.trim()) {
+      setErrorMessage('Please enter a form URL or iframe embed code.');
+      setShowErrorPopup(true);
       return;
     }
-    setResult(data);
+
+    setIsLoading(true);
+    
+    try {
+      const payload: any = { input };
+      if (user?.email) payload.teacher = user.email;
+      
+      const res = await fetch('/api/createLink', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      
+      let data;
+      try {
+        data = await res.json();
+      } catch (parseError) {
+        // If response is not JSON, show the status text
+        setErrorMessage(`Server error (${res.status}): ${res.statusText || 'Unknown error'}`);
+        setShowErrorPopup(true);
+        setIsLoading(false);
+        return;
+      }
+      
+      if (!res.ok) {
+        const errorMsg = data.error || 'Could not extract a valid URL. Please check your input and try again.';
+        const details = data.details ? ` Details: ${data.details}` : '';
+        setErrorMessage(errorMsg + details);
+        setShowErrorPopup(true);
+        setIsLoading(false);
+        return;
+      }
+      
+      // Success - set the result
+      if (data && data.id && data.url) {
+        setResult(data);
+        // Clear input after successful creation
+        setInput('');
+        // Scroll to result after a brief delay to ensure it's rendered
+        setTimeout(() => {
+          resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      } else {
+        setErrorMessage('Invalid response from server. Please try again.');
+        setShowErrorPopup(true);
+      }
+    } catch (err: any) {
+      console.error('Error creating link:', err);
+      // Check if it's a network error or other error
+      if (err.name === 'TypeError' && err.message.includes('fetch')) {
+        setErrorMessage('Network error. Please check your connection and try again.');
+      } else {
+        setErrorMessage(`Error: ${err.message || 'An unexpected error occurred. Please try again.'}`);
+      }
+      setShowErrorPopup(true);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   const [copied, setCopied] = React.useState(false);
@@ -46,8 +140,15 @@ export default function TeacherPage() {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-gray-50 via-gray-100 to-white p-8">
-      <div className="mx-auto max-w-4xl space-y-10">
+    <>
+      {showErrorPopup && (
+        <ErrorPopup
+          message={errorMessage}
+          onClose={() => setShowErrorPopup(false)}
+        />
+      )}
+      <div className="min-h-screen bg-linear-to-b from-gray-50 via-gray-100 to-white p-8">
+        <div className="mx-auto max-w-4xl space-y-10">
         <header className="flex flex-col sm:flex-row items-center justify-between pb-8 border-b border-gray-300 gap-4">
           <div className='text-center sm:text-left'>
             <h1 className="text-3xl font-extrabold text-gray-800">Create a Shareable Form Link</h1>
@@ -86,18 +187,30 @@ export default function TeacherPage() {
               ) : (
                 <button
                   onClick={createLink}
-                  className="flex justify-center items-center gap-1.5 cursor-pointer px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  disabled={isLoading}
+                  className="flex justify-center items-center gap-1.5 cursor-pointer px-5 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed text-white text-sm font-medium rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-400"
                 >
-                  <Link className='w-5'/>
-                  Create Link
+                  {isLoading ? (
+                    <>
+                      <Loader2 className='w-5 h-5 animate-spin'/>
+                      Creating...
+                    </>
+                  ) : (
+                    <>
+                      <Link className='w-5'/>
+                      Create Link
+                    </>
+                  )}
                 </button>
               )}
               {error && <div className="text-red-600 text-sm">{error}</div>}
             </div>
           </div>
 
-          {result && (
-            <div className="rounded-xl bg-white p-6 shadow-md border border-gray-200">
+          {isLoading && <LoadingSpinner />}
+
+          {result && result.id && (
+            <div ref={resultRef} className="rounded-xl bg-white p-6 shadow-md border border-gray-200 animate-fade-in">
               <div className="flex items-center justify-between md:flex-row flex-col gap-4">
                 <div>
                   <div className="text-sm text-gray-500">Shareable link</div>
@@ -138,5 +251,6 @@ export default function TeacherPage() {
         </footer>
       </div>
     </div>
+    </>
   );
 }

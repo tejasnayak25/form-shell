@@ -19,6 +19,7 @@ export default function TeacherDashboard() {
   const [error, setError] = useState<string | null>(null);
   const [query, setQuery] = useState('');
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState<string | null>(null);
 
   useEffect(() => {
     initFirebaseFromEnv();
@@ -29,13 +30,21 @@ export default function TeacherDashboard() {
   useEffect(() => {
     if (!user) return;
     async function load() {
-      const res = await fetch(`/api/${user.email}/list-links`);
-      if (!res.ok) {
-        setError('Could not load links');
-        return;
+      try {
+        // URL encode the email to handle special characters
+        const encodedEmail = encodeURIComponent(user.email);
+        const res = await fetch(`/api/${encodedEmail}/list-links`);
+        if (!res.ok) {
+          const errorData = await res.json().catch(() => ({ error: 'Unknown error' }));
+          setError(errorData.error || 'Could not load links');
+          return;
+        }
+        const data = await res.json();
+        setLinks(data || {});
+      } catch (err: any) {
+        console.error('Error loading links:', err);
+        setError('Failed to load links. Please try again.');
       }
-      const data = await res.json();
-      setLinks(data);
     }
     load();
   }, [user]);
@@ -51,19 +60,47 @@ export default function TeacherDashboard() {
       });
   }, [links, user, query]);
 
-  async function handleDelete(id: string) {
-    if (!confirm('Delete this link?')) return;
-    const res = await fetch(`/api/teacher/links/${id}`, { method: 'DELETE' });
-    if (!res.ok) {
-      setError('Delete failed');
-      return;
+  function handleDeleteClick(id: string) {
+    setShowDeleteConfirm(id);
+  }
+
+  function handleDeleteCancel() {
+    setShowDeleteConfirm(null);
+  }
+
+  async function handleDeleteConfirm(id: string) {
+    setShowDeleteConfirm(null);
+    setError(null);
+    
+    try {
+      const res = await fetch(`/api/teacher/links/${id}`, { method: 'DELETE' });
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({ error: 'Unknown error' }));
+        setError(errorData.error || 'Delete failed');
+        return;
+      }
+      
+      // Update UI immediately
+      setLinks((prev) => {
+        if (!prev) return prev;
+        const copy = { ...prev };
+        delete copy[id];
+        return copy;
+      });
+      
+      // Also reload links from server to ensure consistency
+      if (user) {
+        const encodedEmail = encodeURIComponent(user.email);
+        const res = await fetch(`/api/${encodedEmail}/list-links`);
+        if (res.ok) {
+          const data = await res.json();
+          setLinks(data || {});
+        }
+      }
+    } catch (err: any) {
+      console.error('Delete error:', err);
+      setError('Failed to delete link. Please try again.');
     }
-    setLinks((prev) => {
-      if (!prev) return prev;
-      const copy = { ...prev };
-      delete copy[id];
-      return copy;
-    });
   }
 
   function copyLink(id: string) {
@@ -76,7 +113,31 @@ export default function TeacherDashboard() {
 
   // Balanced scaling and improved aesthetics for a modern look
   return (
-    <div className="min-h-screen bg-linear-to-b from-gray-50 via-gray-100 to-white p-8">
+    <>
+      {/* Delete Confirmation Popup */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Delete Quiz Link</h3>
+            <p className="text-gray-600 mb-6">Are you sure you want to delete this quiz link? This action cannot be undone.</p>
+            <div className="flex gap-3">
+              <button
+                onClick={handleDeleteCancel}
+                className="flex-1 px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => handleDeleteConfirm(showDeleteConfirm)}
+                className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      <div className="min-h-screen bg-linear-to-b from-gray-50 via-gray-100 to-white p-8">
       <div className="mx-auto max-w-6xl space-y-10">
         <header className="flex flex-col sm:flex-row items-center justify-between pb-8 border-b border-gray-300 gap-4">
           <div className='text-center sm:text-left'>
@@ -158,8 +219,8 @@ export default function TeacherDashboard() {
                         {copiedId === k ? <Check/> : <Copy/>}
                         </button>
                         <button
-                        onClick={() => handleDelete(k)}
-                        className={`text-red-500 text-sm font-medium transition cursor-pointer`}
+                        onClick={() => handleDeleteClick(k)}
+                        className={`text-red-500 text-sm font-medium transition cursor-pointer hover:text-red-700`}
                         >
                         <Trash2/>
                         </button>
@@ -176,5 +237,6 @@ export default function TeacherDashboard() {
         </footer>
       </div>
     </div>
+    </>
   );
 }
