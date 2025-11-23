@@ -6,10 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "copy-mediapipe": "node scripts/copy_mediapipe_assets.js"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.9",
+    "@mediapipe/camera_utils": "^0.3.1675466862",
+    "@mediapipe/face_mesh": "^0.4.1633559619",
     "@types/firebase": "^2.4.32",
     "firebase": "^12.4.0",
     "firebase-admin": "^13.5.0",

@@ -20,7 +20,7 @@ export async function GET(req: Request, { params } : { params: Promise<{ teacher
       const rootCollection = firebase.rootCollection;
       
       if (rootCollection) {
-        const snapshot = await rootCollection.doc("system").collection('forms').get();
+        const snapshot = await rootCollection.doc("system").collection('forms').where("teacher", "==", email).get();
         links = snapshot.docs.reduce((acc, doc) => {
           acc[doc.id] = doc.data();
           return acc;
@@ -29,6 +29,8 @@ export async function GET(req: Request, { params } : { params: Promise<{ teacher
     } catch (firebaseError) {
       console.warn('Firebase not available, using JSON fallback');
     }
+
+    console.log(links)
 
     // Fallback to JSON file if Firebase didn't return anything
     if (Object.keys(links).length === 0) {

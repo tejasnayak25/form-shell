@@ -2,6 +2,7 @@
 import { useParams } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
 import { initFirebaseFromEnv, googleSignIn, onAuthChange } from '../../../lib/firebaseClient';
+import FaceProctor from './FaceProctor';
 
 export default function FormPage() {
   const { id } = useParams() as { id?: string };
@@ -12,6 +13,8 @@ export default function FormPage() {
   const [blockedChecked, setBlockedChecked] = useState(false);
   const [showGuidelines, setShowGuidelines] = useState(true);
   const [quizStarted, setQuizStarted] = useState(false);
+  const [cameraPermission, setCameraPermission] = useState<'unknown' | 'granted' | 'denied'>('unknown');
+  const [facePresent, setFacePresent] = useState(false);
   const [violationCount, setViolationCount] = useState(0);
   const [showViolationPopup, setShowViolationPopup] = useState(false);
   const [showCheatingDetected, setShowCheatingDetected] = useState(false);
@@ -33,6 +36,145 @@ export default function FormPage() {
       setUserEmail(u?.email ?? null);
     });
     return () => unsub && unsub();
+  }, []);
+
+  // Keep a ref with latest cameraPermission and log changes
+  const cameraPermissionRef = useRef<'unknown' | 'granted' | 'denied'>(cameraPermission);
+  useEffect(() => {
+    cameraPermissionRef.current = cameraPermission;
+    console.log('[FaceProctor] cameraPermission state ->', cameraPermission);
+  }, [cameraPermission]);
+
+  // Global listeners for camera and face events so we can require camera before start
+  useEffect(() => {
+    const camGranted = () => {
+      console.log('[FaceProctor] received cam_permission_granted event');
+      setCameraPermission('granted');
+      setError(null);
+    };
+    const camDenied = (e: Event) => {
+      const err = (e as CustomEvent)?.detail?.error;
+      console.warn('[FaceProctor] received cam_permission_denied event, detail=', err);
+      // If Permissions API or our permission state already shows granted, ignore stale denied events
+      if (cameraPermissionRef.current === 'granted') {
+        console.log('[FaceProctor] Ignoring cam_permission_denied because current permission is granted');
+        return;
+      }
+      setCameraPermission('denied');
+      setError('Camera access is required to start the quiz. Please allow camera access.');
+    };
+    const onFacePresent = () => {
+      setFacePresent(true);
+      setError(null);
+    };
+    const onFaceAbsent = () => {
+      setFacePresent(false);
+    };
+
+    window.addEventListener('cam_permission_granted', camGranted as EventListener);
+    window.addEventListener('cam_permission_denied', camDenied as EventListener);
+    window.addEventListener('face_present', onFacePresent as EventListener);
+    window.addEventListener('face_absent', onFaceAbsent as EventListener);
+
+    return () => {
+      window.removeEventListener('cam_permission_granted', camGranted as EventListener);
+      window.removeEventListener('cam_permission_denied', camDenied as EventListener);
+      window.removeEventListener('face_present', onFacePresent as EventListener);
+      window.removeEventListener('face_absent', onFaceAbsent as EventListener);
+    };
+  }, []);
+
+  // Keep in sync with browser permission state (if supported)
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const permsApi = (navigator as any).permissions;
+    console.log('[FaceProctor] permissions effect init, permsApi=', !!permsApi);
+    let mounted = true;
+
+    async function evaluatePermission() {
+      // Try Permissions API first
+      if (permsApi && permsApi.query) {
+        try {
+          const status = await permsApi.query({ name: 'camera' });
+          if (!mounted) return;
+          const apply = () => {
+            console.log('[FaceProctor] permissions status=', status.state);
+            if (status.state === 'granted') {
+              setCameraPermission('granted');
+              try {
+                window.dispatchEvent(new CustomEvent('cam_permission_granted'));
+              } catch (e) {
+                // ignore
+              }
+            }
+            else if (status.state === 'denied') setCameraPermission('denied');
+            else setCameraPermission('unknown');
+          };
+          apply();
+          status.onchange = () => {
+            console.log('[FaceProctor] permissions onchange ->', status.state);
+            apply();
+          };
+          return;
+        } catch (err) {
+          console.log('[FaceProctor] permissions.query failed', err);
+        }
+      }
+
+      // Fallback: use enumerateDevices() to infer whether camera permission is granted
+      if (navigator.mediaDevices && navigator.mediaDevices.enumerateDevices) {
+        try {
+          const devices = await navigator.mediaDevices.enumerateDevices();
+          if (!mounted) return;
+          const videoInputs = devices.filter((d) => d.kind === 'videoinput');
+          const hasLabel = videoInputs.some((d) => Boolean((d as any).label));
+          if (hasLabel) {
+            console.log('[FaceProctor] enumerateDevices indicates camera permission granted');
+            setCameraPermission('granted');
+            try {
+              window.dispatchEvent(new CustomEvent('cam_permission_granted'));
+            } catch (e) {
+              // ignore
+            }
+          } else {
+            // If we previously had granted, keep it; otherwise unknown
+            setCameraPermission((prev) => (prev === 'granted' ? 'granted' : 'unknown'));
+          }
+        } catch (err) {
+          console.log('[FaceProctor] enumerateDevices failed', err);
+        }
+      }
+    }
+
+    evaluatePermission();
+
+    const onDeviceChange = () => {
+      console.log('[FaceProctor] devicechange event');
+      evaluatePermission();
+    };
+    try {
+      if (navigator.mediaDevices && (navigator.mediaDevices as any).addEventListener) {
+        (navigator.mediaDevices as any).addEventListener('devicechange', onDeviceChange);
+      } else if ((navigator as any).mediaDevices) {
+        (navigator as any).mediaDevices.ondevicechange = onDeviceChange;
+      }
+    } catch (e) {
+      // ignore
+    }
+
+    return () => {
+      mounted = false;
+      try {
+        if (navigator.mediaDevices && (navigator.mediaDevices as any).removeEventListener) {
+          (navigator.mediaDevices as any).removeEventListener('devicechange', onDeviceChange);
+        } else if ((navigator as any).mediaDevices) {
+          (navigator as any).mediaDevices.ondevicechange = null;
+        }
+      } catch (e) {
+        // ignore
+      }
+    };
   }, []);
 
   // Check if student is blocked
@@ -216,6 +358,18 @@ export default function FormPage() {
     let isFocused = document.hasFocus();
     let violationTimeout: NodeJS.Timeout | null = null;
 
+    // Listen for custom cheat events (from client-side FaceProctor)
+    const violationEventHandler = (e: Event) => {
+      try {
+        const ev = e as CustomEvent;
+        const reason = ev?.detail?.reason ?? 'unknown';
+        handleViolation(reason);
+      } catch (err) {
+        console.warn('cheat_violation handler error', err);
+      }
+    };
+    window.addEventListener('cheat_violation', violationEventHandler as EventListener);
+
     function checkFocusLoss() {
       // Ignore during grace period - check both flag and time
       if (ignoreViolationsRef.current || Date.now() < gracePeriodEndTimeRef.current) {
@@ -323,6 +477,27 @@ export default function FormPage() {
         checkFocusLoss();
       }
     }, 500);
+
+    // Listen for camera / face events
+    const camGranted = () => {
+      console.log('[FaceProctor] (anti-cheat) cam_permission_granted event');
+      setCameraPermission('granted');
+    };
+    const camDenied = (e?: Event) => {
+      const err = (e as CustomEvent)?.detail?.error;
+      console.warn('[FaceProctor] (anti-cheat) cam_permission_denied event, detail=', err);
+      if (cameraPermissionRef.current === 'granted') {
+        console.log('[FaceProctor] (anti-cheat) ignoring cam_permission_denied because current permission is granted');
+        return;
+      }
+      setCameraPermission('denied');
+    };
+    const onFacePresent = () => setFacePresent(true);
+    const onFaceAbsent = () => setFacePresent(false);
+    window.addEventListener('cam_permission_granted', camGranted as EventListener);
+    window.addEventListener('cam_permission_denied', camDenied as EventListener);
+    window.addEventListener('face_present', onFacePresent as EventListener);
+    window.addEventListener('face_absent', onFaceAbsent as EventListener);
 
     function disableSelection(e: Event) {
       e.preventDefault();
@@ -565,6 +740,7 @@ export default function FormPage() {
 
     return () => {
       clearInterval(focusCheckInterval);
+      window.removeEventListener('cheat_violation', violationEventHandler as EventListener);
       if (violationTimeout) clearTimeout(violationTimeout);
       
       document.removeEventListener('dragstart', dragStartHandler);
@@ -613,6 +789,16 @@ export default function FormPage() {
 
   async function handleStartQuiz() {
     console.log('▶️ Starting quiz...');
+
+    // Ensure camera permission and face presence before starting
+    if (cameraPermission !== 'granted') {
+      setError('Please allow camera access before starting the quiz.');
+      return;
+    }
+    if (!facePresent) {
+      setError('No face detected. Please position your face in front of the camera before starting.');
+      return;
+    }
     
     // Set grace period flag and time to ignore violations during fullscreen transition
     ignoreViolationsRef.current = true;
@@ -1097,6 +1283,10 @@ export default function FormPage() {
           sandbox="allow-forms allow-scripts allow-same-origin"
           referrerPolicy="no-referrer"
         />
+        {/* Client-side proctoring: hidden video + mediapipe detector (mounted once at page bottom) */}
+        {/* Keep the proctor mounted while the quiz is shown so camera stays active */}
+        <FaceProctor active={true} maxNumFaces={2} />
+
         <style jsx>{`
           @keyframes popupFadeIn {
             from {
@@ -1170,6 +1360,7 @@ export default function FormPage() {
                       <li>Right-click context menu is disabled</li>
                       <li>The form will be automatically submitted if you switch tabs or lose focus</li>
                       <li>Ensure you have a stable internet connection</li>
+                      <li>Ensure your face is visible to the camera — camera access is required</li>
                       <li>Read all questions carefully before answering</li>
                       <li>Complete the form within the allotted time</li>
                     </ul>
@@ -1180,10 +1371,16 @@ export default function FormPage() {
                     </p>
                   </div>
                 </div>
-                <div className="flex justify-center pt-4">
+                <div className="flex flex-col items-center pt-4">
+                  <div className="text-sm text-gray-600 mb-2">
+                    Camera: <strong className="ml-1">{cameraPermission === 'granted' ? 'Allowed' : cameraPermission === 'denied' ? 'Denied' : 'Not granted'}</strong>
+                    <span className="mx-3">•</span>
+                    Face: <strong className="ml-1">{facePresent ? 'Detected' : 'Not detected'}</strong>
+                  </div>
                   <button
                     onClick={handleStartQuiz}
-                    className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition transform hover:scale-105"
+                    disabled={cameraPermission !== 'granted' || !facePresent}
+                    className={`px-8 py-3 text-white text-lg font-semibold rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition transform hover:scale-105 ${cameraPermission === 'granted' && facePresent ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-400 cursor-not-allowed'}`}
                   >
                     Start Quiz
                   </button>
@@ -1207,6 +1404,8 @@ export default function FormPage() {
         <footer className="pt-8 border-t border-gray-300 text-center text-sm text-gray-500">
           © 2025 Form Shell. All rights reserved.
         </footer>
+        {/* Mount proctor during guidelines and quiz so camera is requested early */}
+        <FaceProctor active={showGuidelines || quizStarted} maxNumFaces={2} />
       </div>
     </div>
   );

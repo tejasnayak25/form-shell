@@ -18,13 +18,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
-        {/* Create a marker element before the library loads so the library finds it */}
-        <Script id="disable-devtool-marker" strategy="beforeInteractive">
+        {/* <Script id="disable-devtool-marker" strategy="beforeInteractive">
           {`(function(){var el=document.createElement('div');el.setAttribute('disable-devtool-auto','');document.documentElement.appendChild(el)})();`}
         </Script>
-
-        {/* Load the disable-devtool library before the page becomes interactive */}
-        <Script src="https://cdn.jsdelivr.net/npm/disable-devtool" strategy="beforeInteractive" />
+        <Script src="https://cdn.jsdelivr.net/npm/disable-devtool" strategy="beforeInteractive" /> */}
 
         {children}
       </body>
