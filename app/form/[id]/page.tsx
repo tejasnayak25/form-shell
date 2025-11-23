@@ -9,6 +9,7 @@ export default function FormPage() {
   const [error, setError] = useState<string | null>(null);
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [isBlocked, setIsBlocked] = useState(false);
+  const [blockedChecked, setBlockedChecked] = useState(false);
   const [showGuidelines, setShowGuidelines] = useState(true);
   const [quizStarted, setQuizStarted] = useState(false);
   const [violationCount, setViolationCount] = useState(0);
@@ -24,6 +25,7 @@ export default function FormPage() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const submitQuizRef = useRef<(() => Promise<void>) | null>(null); // Ref to submit function
+  const blockedPostedRef = useRef(false); // Ensure we only post block once per session
 
   useEffect(() => {
     initFirebaseFromEnv();
@@ -36,28 +38,49 @@ export default function FormPage() {
   // Check if student is blocked
   useEffect(() => {
     async function checkBlocked() {
+      if (!id) {
+        // Nothing to check without a form id
+        setBlockedChecked(true);
+        return;
+      }
+
       if (!userEmail) {
         setIsBlocked(false);
+        // Wait until a user signs in so we can correctly determine blocked status.
+        setBlockedChecked(false);
         return;
       }
 
       try {
-        const res = await fetch(`/api/blocked-emails?email=${encodeURIComponent(userEmail)}`);
+        const res = await fetch(`/api/links/${id}/blocked-emails`);
         if (res.ok) {
           const data = await res.json();
-          setIsBlocked(data.isBlocked || false);
-          if (data.isBlocked) {
+          const list = Array.isArray(data.blockedEmails) ? data.blockedEmails : [];
+          const normalized = list.map((e: string) => String(e).toLowerCase().trim());
+          const blocked = normalized.includes(userEmail.toLowerCase().trim());
+          setIsBlocked(blocked);
+          if (blocked) {
             setError('Access denied: You have been blocked due to previous cheating violations. Please contact your teacher.');
+          } else {
+            // Clear any previous error when user is not blocked
+            setError(null);
           }
+        } else {
+          // If API fails, do not block by default; clear previous blocked state
+          setIsBlocked(false);
+          setError(null);
         }
       } catch (err) {
         console.error('Error checking blocked status:', err);
         // Don't block access if check fails
       }
+      finally {
+        setBlockedChecked(true);
+      }
     }
 
     checkBlocked();
-  }, [userEmail]);
+  }, [userEmail, id]);
 
   useEffect(() => {
     if (!id) {
@@ -65,8 +88,8 @@ export default function FormPage() {
       return;
     }
 
-    // Don't load link if student is blocked
-    if (isBlocked) {
+    // Don't load link if student is blocked or blocked status not yet known
+    if (!blockedChecked || isBlocked) {
       return;
     }
 
@@ -105,7 +128,7 @@ export default function FormPage() {
     }
 
     load();
-  }, [id, userEmail, isBlocked]);
+  }, [id, userEmail, isBlocked, blockedChecked]);
 
   // Anti-cheating features - MUST run before early return
   useEffect(() => {
@@ -154,16 +177,35 @@ export default function FormPage() {
         sendEvent({ type: 'violation', count: newCount, reason });
 
         if (newCount === 1) {
-          // First violation - show warning
+          // First violation - show warning (user must acknowledge)
           setShowViolationPopup(true);
-          setTimeout(() => setShowViolationPopup(false), 5000);
         } else if (newCount === 2) {
-          // Second violation - show warning
+          // Second violation - show warning (user must acknowledge)
           setShowViolationPopup(true);
-          setTimeout(() => setShowViolationPopup(false), 5000);
         } else if (newCount >= 3) {
           // Third violation - show cheating detected overlay (NO auto-submit, user must click OK)
           setShowCheatingDetected(true);
+          handleSubmitQuiz();
+          // Report and block the student for this form (fire-and-forget). Only once.
+          if (!blockedPostedRef.current && userEmail && id) {
+            blockedPostedRef.current = true;
+            (async () => {
+              try {
+                await fetch(`/api/links/${id}/blocked-emails`, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ email: userEmail }),
+                });
+                // Reflect blocked status in UI
+                setIsBlocked(true);
+                setError('Access denied: You have been blocked due to previous cheating violations. Please contact your teacher.');
+                setBlockedChecked(true);
+              } catch (e) {
+                console.error('Failed to post blocked email:', e);
+              }
+            })();
+          }
+          
         }
         
         return newCount;
@@ -601,6 +643,36 @@ export default function FormPage() {
     }, gracePeriodDuration);
   }
 
+  // When a warning is shown, user must click Continue to acknowledge and (if needed) re-enter fullscreen.
+  async function handleContinueFromWarning() {
+    // Start a short grace period to ignore violations while we try to enter fullscreen
+    ignoreViolationsRef.current = true;
+    const gracePeriodDuration = 2000;
+    gracePeriodEndTimeRef.current = Date.now() + gracePeriodDuration;
+
+    // Try to enter fullscreen if not already
+    try {
+      if (!document.fullscreenElement) {
+        if (containerRef.current) {
+          await containerRef.current.requestFullscreen();
+        } else if (document.documentElement.requestFullscreen) {
+          await document.documentElement.requestFullscreen();
+        }
+      }
+    } catch (e) {
+      console.warn('Could not enter fullscreen on Continue:', e);
+    }
+
+    // Remove the popup
+    setShowViolationPopup(false);
+
+    // End grace period after duration
+    setTimeout(() => {
+      ignoreViolationsRef.current = false;
+      gracePeriodEndTimeRef.current = 0;
+    }, gracePeriodDuration);
+  }
+
   // Cleanup on unmount
   useEffect(() => {
     return () => {
@@ -766,9 +838,9 @@ export default function FormPage() {
     }).catch(err => console.error('Failed to log submission:', err));
     
     // Mark as submitted
-    setQuizSubmitted(true);
+    // setQuizSubmitted(true);
     setIsSubmitting(false);
-    setShowCheatingDetected(false);
+    // setShowCheatingDetected(false);
     
     if (submitted) {
       console.log('✅ Form submission triggered');
@@ -796,9 +868,9 @@ export default function FormPage() {
   }, [id, userEmail, violationCount, isSubmitting, quizSubmitted]);
 
   // Store submit function in ref so it's accessible from useEffect
-  useEffect(() => {
-    submitQuizRef.current = handleSubmitQuiz;
-  }, [handleSubmitQuiz]);
+  // useEffect(() => {
+  //   submitQuizRef.current = handleSubmitQuiz;
+  // }, [handleSubmitQuiz]);
 
   // Render fullscreen iframe when quiz is started
   if (quizStarted && link) {
@@ -853,11 +925,29 @@ export default function FormPage() {
                 <div>Warning 2/2: Next time will result in quiz termination.</div>
               </>
             )}
+            <div style={{ marginTop: '18px' }}>
+              <button
+                onClick={() => {
+                  void handleContinueFromWarning();
+                }}
+                style={{
+                  backgroundColor: '#f59e0b',
+                  color: 'white',
+                  padding: '10px 20px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontWeight: '600'
+                }}
+              >
+                Continue
+              </button>
+            </div>
           </div>
         )}
 
         {/* Quiz Submitted Message */}
-        {quizSubmitted && submittedMessage && (
+        {/* {quizSubmitted && submittedMessage && (
           <div
             style={{
               position: 'fixed',
@@ -896,7 +986,7 @@ export default function FormPage() {
               </p>
             </div>
           </div>
-        )}
+        )} */}
 
         {/* Cheating Detected Overlay */}
         {showCheatingDetected && !quizSubmitted && (
@@ -931,9 +1021,9 @@ export default function FormPage() {
                 Cheating Detected
               </h2>
               <p style={{ fontSize: '18px', marginBottom: '32px', opacity: 0.95 }}>
-                Your quiz will now be submitted.
+                You have been blocked from continuing the quiz due to multiple violations of the exam rules.
               </p>
-              <button
+              {/* <button
                 onClick={() => {
                   if (submitQuizRef.current) {
                     submitQuizRef.current();
@@ -962,7 +1052,7 @@ export default function FormPage() {
                 }}
               >
                 {isSubmitting ? 'Submitting...' : quizSubmitted ? 'Submitted' : 'OK'}
-              </button>
+              </button> */}
             </div>
           </div>
         )}

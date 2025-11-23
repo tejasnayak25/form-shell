@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from 'react';
 import { initFirebaseFromEnv, googleSignIn, onAuthChange } from '../../../lib/firebaseClient';
-import { Check, Copy, ExternalLink, LogIn, Plus, Trash2 } from "lucide-react";
+import { Check, Copy, ExternalLink, LogIn, Plus, Trash2, Mail, Ban, MailXIcon } from "lucide-react";
 
 function formatDate(iso?: string) {
   if (!iso) return '-';
@@ -20,6 +20,10 @@ export default function TeacherDashboard() {
   const [query, setQuery] = useState('');
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState<string | null>(null);
+  const [showBlockedFor, setShowBlockedFor] = useState<string | null>(null);
+  const [blockedEmails, setBlockedEmails] = useState<string[] | null>(null);
+  const [blockedLoading, setBlockedLoading] = useState(false);
+  const [blockedError, setBlockedError] = useState<string | null>(null);
 
   useEffect(() => {
     initFirebaseFromEnv();
@@ -109,6 +113,79 @@ export default function TeacherDashboard() {
       setCopiedId(id);
       setTimeout(() => setCopiedId(null), 2000);
     });
+  }
+
+  async function openBlockedEmails(id: string) {
+    setShowBlockedFor(id);
+    setBlockedEmails(null);
+    setBlockedError(null);
+    setBlockedLoading(true);
+    try {
+      const res = await fetch(`/api/links/${encodeURIComponent(id)}/blocked-emails`);
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ error: 'Failed to load blocked emails' }));
+        setBlockedError(err.error || 'Failed to load blocked emails');
+        setBlockedLoading(false);
+        return;
+      }
+      const data = await res.json();
+      // Accept either an array or an object with `blockedEmails`/`emails` property
+      let emails: string[] = [];
+      if (Array.isArray(data)) emails = data;
+      else if (Array.isArray(data.blockedEmails)) emails = data.blockedEmails;
+      else if (Array.isArray(data.emails)) emails = data.emails;
+      else if (data?.emails && typeof data.emails === 'object') emails = (Object.values(data.emails) as unknown[]).flat() as string[];
+      setBlockedEmails(emails || []);
+    } catch (err: any) {
+      console.error('Error loading blocked emails:', err);
+      setBlockedError('Failed to load blocked emails.');
+    } finally {
+      setBlockedLoading(false);
+    }
+  }
+
+  async function unblockEmail(formId: string, email: string) {
+    setBlockedError(null);
+    try {
+      const res = await fetch(`/api/links/${encodeURIComponent(formId)}/blocked-emails`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ error: 'Failed to remove blocked email' }));
+        setBlockedError(err.error || 'Failed to remove blocked email');
+        return;
+      }
+      const data = await res.json().catch(() => ({}));
+      if (data && data.success === false) {
+        setBlockedError(data.message || 'Failed to remove blocked email');
+        return;
+      }
+
+      // Remove locally from UI
+      setBlockedEmails((prev) => (prev ? prev.filter((e) => e !== email) : prev));
+
+      // Also update links state (if present) so list-links reflects change
+      setLinks((prev) => {
+        if (!prev) return prev;
+        const copy = { ...prev };
+        if (copy[formId] && Array.isArray(copy[formId].blockedEmails)) {
+          copy[formId] = { ...copy[formId], blockedEmails: copy[formId].blockedEmails.filter((e: string) => e !== email) };
+        }
+        return copy;
+      });
+    } catch (err: any) {
+      console.error('Error removing blocked email:', err);
+      setBlockedError('Failed to remove blocked email.');
+    }
+  }
+
+  function closeBlockedModal() {
+    setShowBlockedFor(null);
+    setBlockedEmails(null);
+    setBlockedError(null);
+    setBlockedLoading(false);
   }
 
   // Balanced scaling and improved aesthetics for a modern look
@@ -219,6 +296,13 @@ export default function TeacherDashboard() {
                         {copiedId === k ? <Check/> : <Copy/>}
                         </button>
                         <button
+                        onClick={() => openBlockedEmails(k)}
+                        title="Blocked emails"
+                        className={`text-gray-600 text-sm font-medium transition cursor-pointer hover:text-gray-800`}
+                        >
+                        <MailXIcon />
+                        </button>
+                        <button
                         onClick={() => handleDeleteClick(k)}
                         className={`text-red-500 text-sm font-medium transition cursor-pointer hover:text-red-700`}
                         >
@@ -231,6 +315,48 @@ export default function TeacherDashboard() {
             ))}
           </section>
         </main>
+
+        {/* Blocked emails modal */}
+        {showBlockedFor && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 bg-opacity-50 size-full">
+            <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4">
+              <div className="flex items-start justify-between">
+                <h3 className="text-lg font-semibold text-gray-800 mb-2">Blocked Emails for /form/{showBlockedFor}</h3>
+                <button onClick={closeBlockedModal} className="text-gray-600 hover:text-gray-500 cursor-pointer">✕</button>
+              </div>
+
+              {blockedLoading && <p className="text-sm text-gray-500">Loading...</p>}
+              {blockedError && <p className="text-sm text-red-500">{blockedError}</p>}
+
+              {!blockedLoading && !blockedError && (
+                <div className="max-h-64 overflow-auto mt-3">
+                  {blockedEmails && blockedEmails.length > 0 ? (
+                    <ul className="space-y-2">
+                      {blockedEmails.map((e) => (
+                        <li key={e} className="flex items-center justify-between gap-3">
+                          <span className="text-sm text-gray-700 wrap-break-word">{e}</span>
+                          <button
+                            onClick={() => unblockEmail(showBlockedFor as string, e)}
+                            title="Remove blocked email"
+                            className="text-red-500 hover:text-red-700 px-2 cursor-pointer"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <div className="text-sm text-gray-500">No blocked emails found.</div>
+                  )}
+                </div>
+              )}
+
+              <div className="mt-6 flex justify-end">
+                <button onClick={closeBlockedModal} className="px-4 py-2 bg-gray-600 rounded-lg hover:bg-gray-500 cursor-pointer">Close</button>
+              </div>
+            </div>
+          </div>
+        )}
 
         <footer className="pt-8 border-t border-gray-300 text-center text-sm text-gray-500">
           © 2025 Teacher Dashboard. All rights reserved.
