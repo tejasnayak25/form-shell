@@ -570,12 +570,6 @@ export default function FormPage() {
   }, [id, userEmail, quizStarted, isSubmitting]);
 
   async function handleStartQuiz() {
-    // Prevent starting quiz if blocked
-    if (isBlocked) {
-      setError('Access denied: You have been blocked due to previous cheating violations. Please contact your teacher.');
-      return;
-    }
-    
     console.log('▶️ Starting quiz...');
     
     // Set grace period flag and time to ignore violations during fullscreen transition
@@ -1059,43 +1053,10 @@ export default function FormPage() {
             </div>
           ) : error ? (
             <div className="mx-auto max-w-4xl p-8">
-              <div className={`border-l-4 p-6 rounded-lg ${isBlocked ? 'bg-red-100 border-red-600' : 'bg-red-50 border-red-500'}`}>
-                <h3 className={`text-lg font-semibold mb-2 ${isBlocked ? 'text-red-900' : 'text-red-800'}`}>
-                  {isBlocked ? '🚫 Access Denied' : 'Error Loading Form'}
-                </h3>
-                <p className={isBlocked ? 'text-red-800 font-medium' : 'text-red-700'}>{error}</p>
-                {isBlocked && (
-                  <div className="mt-4 p-4 bg-red-200 rounded border border-red-400">
-                    <p className="text-sm text-red-900 font-semibold">
-                      You have been blocked from accessing quizzes due to previous cheating violations.
-                    </p>
-                    <p className="text-sm text-red-800 mt-2">
-                      If you believe this is an error, please contact your teacher to resolve this issue.
-                    </p>
-                  </div>
-                )}
-                {!isBlocked && (
-                  <p className="text-sm text-red-600 mt-4">Please check the link URL or contact your teacher.</p>
-                )}
-              </div>
-            </div>
-          ) : isBlocked ? (
-            <div className="mx-auto max-w-4xl p-8">
-              <div className="bg-red-100 border-l-4 border-red-600 p-6 rounded-lg">
-                <h3 className="text-lg font-semibold text-red-900 mb-2">
-                  🚫 Access Denied
-                </h3>
-                <p className="text-red-800 font-medium mb-4">
-                  You have been blocked from accessing quizzes due to previous cheating violations.
-                </p>
-                <div className="mt-4 p-4 bg-red-200 rounded border border-red-400">
-                  <p className="text-sm text-red-900 font-semibold">
-                    You have been blocked from accessing quizzes due to previous cheating violations.
-                  </p>
-                  <p className="text-sm text-red-800 mt-2">
-                    If you believe this is an error, please contact your teacher to resolve this issue.
-                  </p>
-                </div>
+              <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
+                <h3 className="text-lg font-semibold text-red-800 mb-2">Error Loading Form</h3>
+                <p className="text-red-700">{error}</p>
+                <p className="text-sm text-red-600 mt-4">Please check the link URL or contact your teacher.</p>
               </div>
             </div>
           ) : !link ? (
@@ -1132,14 +1093,9 @@ export default function FormPage() {
                 <div className="flex justify-center pt-4">
                   <button
                     onClick={handleStartQuiz}
-                    disabled={isBlocked}
-                    className={`px-8 py-3 text-white text-lg font-semibold rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition transform ${
-                      isBlocked 
-                        ? 'bg-gray-400 cursor-not-allowed' 
-                        : 'bg-blue-600 hover:bg-blue-700 hover:scale-105'
-                    }`}
+                    className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition transform hover:scale-105"
                   >
-                    {isBlocked ? 'Access Denied' : 'Start Quiz'}
+                    Start Quiz
                   </button>
                 </div>
               </div>
