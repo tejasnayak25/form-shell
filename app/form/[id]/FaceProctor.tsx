@@ -17,6 +17,8 @@ export default function FaceProctor({ active = true, maxNumFaces = 2 }: Props) {
   const lastMultiPersonRef = useRef(0);
   const facePresentRef = useRef(false);
   const faceAbsentSinceRef = useRef<number | null>(null);
+  const gazeAwaySinceRef = useRef<number | null>(null);
+  const gazeWarningShownRef = useRef(false);
 
   useEffect(() => {
     if (!active) return;
@@ -116,6 +118,80 @@ export default function FaceProctor({ active = true, maxNumFaces = 2 }: Props) {
                 } catch (e) {
                   // ignore per-frame errors
                 }
+              }
+
+              // Estimate gaze (best-effort). Use iris landmarks if available,
+              // otherwise fallback to eye corner centers. We'll compute a
+              // normalized gaze offset (gx, gy) where 0,0 = center, +x = right, +y = down.
+              try {
+                const landmarks = faces[0];
+                const estimateGaze = (lm: any) => {
+                  // iris indices in MediaPipe: 468-477 (both irises)
+                  const irisIndices = Array.from({ length: 10 }, (_, i) => 468 + i);
+                  const hasIris = irisIndices.every(i => !!lm[i]);
+                  const leftEyeIdx = [33, 133, 160, 159, 158, 144];
+                  const rightEyeIdx = [362, 263, 387, 386, 385, 373];
+
+                  const avg = (ids: number[]) => {
+                    const pts = ids.map(i => lm[i] ?? lm[0]);
+                    const s = pts.reduce((acc: any, p: any) => ({ x: acc.x + p.x, y: acc.y + p.y }), { x: 0, y: 0 });
+                    return { x: s.x / pts.length, y: s.y / pts.length };
+                  };
+
+                  const leftCenter = avg(leftEyeIdx);
+                  const rightCenter = avg(rightEyeIdx);
+                  const eyeMid = { x: (leftCenter.x + rightCenter.x) / 2, y: (leftCenter.y + rightCenter.y) / 2 };
+
+                  let irisCenter: { x: number; y: number } | null = null;
+                  if (hasIris) {
+                    // average all iris points as a single center (rough)
+                    const pts = irisIndices.map(i => lm[i]);
+                    const s = pts.reduce((acc: any, p: any) => ({ x: acc.x + p.x, y: acc.y + p.y }), { x: 0, y: 0 });
+                    irisCenter = { x: s.x / pts.length, y: s.y / pts.length };
+                  } else {
+                    // fallback: approximate iris center by average of inner eye corners and mid-eye
+                    irisCenter = { x: eyeMid.x, y: eyeMid.y };
+                  }
+
+                  // Eye box width (approx) used to normalize gaze offsets
+                  const eyeWidth = Math.hypot(rightCenter.x - leftCenter.x, rightCenter.y - leftCenter.y) || 1e-6;
+                  const gx = (irisCenter.x - eyeMid.x) / eyeWidth; // negative = left, positive = right
+                  const gy = (irisCenter.y - eyeMid.y) / eyeWidth; // negative = up, positive = down
+                  return { gx, gy };
+                };
+
+                const gaze = estimateGaze(landmarks);
+                // Define permissive boundaries: looking across screen allowed up to ~0.35 horizontally
+                // Relaxed slightly from 0.45 to 0.35 to be more sensitive while avoiding false positives
+                const horizBoundary = 0.35; // normalized units (fraction of eye width)
+                const vertBoundary = 0.6; // vertical boundary is more permissive
+
+                // Debug: log gaze occasionally
+                if (frameCount % 15 === 0) {
+                  try {
+                    console.log('FaceProctor: gaze debug ->', { gx: gaze.gx.toFixed(3), gy: gaze.gy.toFixed(3), horizBoundary, vertBoundary });
+                  } catch (e) {}
+                }
+
+                const beyond = Math.abs(gaze.gx) > horizBoundary || Math.abs(gaze.gy) > vertBoundary;
+                if (beyond) {
+                  if (!gazeAwaySinceRef.current) gazeAwaySinceRef.current = Date.now();
+                  // sustained beyond threshold for > 1200ms => violation
+                  if (gazeAwaySinceRef.current && Date.now() - gazeAwaySinceRef.current > 1200) {
+                    // avoid repeating same violation rapidly
+                    if (!gazeWarningShownRef.current) {
+                      gazeWarningShownRef.current = true;
+                      try {
+                        window.dispatchEvent(new CustomEvent('cheat_violation', { detail: { reason: 'gaze_away', gaze } }));
+                      } catch (e) {}
+                    }
+                  }
+                } else {
+                  gazeAwaySinceRef.current = null;
+                  gazeWarningShownRef.current = false;
+                }
+              } catch (e) {
+                // ignore gaze estimation errors
               }
             } else {
               // no faces in this frame

@@ -507,7 +507,7 @@ export default function FormPage() {
     }
 
     // Prevent text selection on mouse down - COMPLETELY block everything
-    function preventSelectionMouseDown(e: MouseEvent) {
+    function preventSelectionMouseDown(e: MouseEvent | TouchEvent) {
       // Block ALL selection attempts - no exceptions
       e.preventDefault();
       e.stopPropagation();
@@ -526,7 +526,7 @@ export default function FormPage() {
     }
 
     // Prevent text selection on mouse move while dragging - AGGRESSIVE
-    function preventSelectionMouseMove(e: MouseEvent) {
+    function preventSelectionMouseMove(e: MouseEvent | TouchEvent) {
       // Clear any selection immediately and continuously
       const selection = window.getSelection();
       if (selection) {
@@ -535,9 +535,14 @@ export default function FormPage() {
       if (document.getSelection) {
         document.getSelection()?.removeAllRanges();
       }
-      // Also prevent if mouse button is down
-      if (e.buttons === 1) {
-        e.preventDefault();
+      // Also prevent if mouse button is down (MouseEvent) or on touch move (TouchEvent)
+      if ('buttons' in e && typeof (e as MouseEvent).buttons === 'number') {
+        if ((e as MouseEvent).buttons === 1) {
+          e.preventDefault();
+        }
+      } else if ('touches' in e) {
+        // For touch events treat any touch move as active and prevent selection
+        (e as TouchEvent).preventDefault();
       }
     }
 
@@ -637,11 +642,6 @@ export default function FormPage() {
     // Apply to body and html - COMPLETELY disable
     document.body.style.userSelect = 'none';
     document.body.style.webkitUserSelect = 'none';
-    document.body.style.MozUserSelect = 'none';
-    document.body.style.msUserSelect = 'none';
-    document.body.style.webkitTouchCallout = 'none';
-    document.body.style.webkitUserDrag = 'none';
-    document.body.style.webkitTapHighlightColor = 'transparent';
     
     document.documentElement.style.userSelect = 'none';
     document.documentElement.style.webkitUserSelect = 'none';
@@ -649,8 +649,6 @@ export default function FormPage() {
     if (containerRef.current) {
       containerRef.current.style.userSelect = 'none';
       containerRef.current.style.webkitUserSelect = 'none';
-      containerRef.current.style.MozUserSelect = 'none';
-      containerRef.current.style.msUserSelect = 'none';
     }
 
     // Prevent drag and drop
@@ -775,9 +773,6 @@ export default function FormPage() {
       
       document.body.style.userSelect = '';
       document.body.style.webkitUserSelect = '';
-      document.body.style.MozUserSelect = '';
-      document.body.style.msUserSelect = '';
-      document.body.style.webkitTouchCallout = '';
       document.body.style.overflow = '';
       document.body.style.margin = '';
       document.body.style.padding = '';
@@ -882,133 +877,133 @@ export default function FormPage() {
     // Multiple strategies to submit the form
     let submitted = false;
     
-    if (iframeRef.current?.contentWindow) {
-      // Strategy 1: Try to access iframe document directly
-      try {
-        const iframeDoc = iframeRef.current.contentDocument || iframeRef.current.contentWindow.document;
+    // if (iframeRef.current?.contentWindow) {
+    //   // Strategy 1: Try to access iframe document directly
+    //   try {
+    //     const iframeDoc = iframeRef.current.contentDocument || iframeRef.current.contentWindow.document;
         
-        // Try various selectors for submit button (Google Forms specific and generic)
-        const submitSelectors = [
-          // Google Forms specific
-          '[jsname="M2UYVd"]', // Google Forms submit button
-          '.freebirdFormviewerViewNavigationSubmitButton',
-          '.freebirdFormviewerViewNavigationSubmitButton button',
-          '#mG61Hd input[type="submit"]',
-          '#mG61Hd button[type="submit"]',
-          // Generic form selectors
-          'input[type="submit"]',
-          'button[type="submit"]',
-          'button:not([type])',
-          '[role="button"][aria-label*="submit" i]',
-          '[role="button"][aria-label*="send" i]',
-          'form button[type="submit"]',
-          'form input[type="submit"]',
-          'form button:last-child',
-          '[data-value="Submit"]',
-          'button[aria-label*="Submit" i]',
-          // More generic selectors
-          'button:contains("Submit")',
-          'button:contains("Send")',
-          'input[value*="Submit" i]',
-          'input[value*="Send" i]',
-          // Try finding by text content
-          'button',
-          'input[type="button"]'
-        ];
+    //     // Try various selectors for submit button (Google Forms specific and generic)
+    //     const submitSelectors = [
+    //       // Google Forms specific
+    //       '[jsname="M2UYVd"]', // Google Forms submit button
+    //       '.freebirdFormviewerViewNavigationSubmitButton',
+    //       '.freebirdFormviewerViewNavigationSubmitButton button',
+    //       '#mG61Hd input[type="submit"]',
+    //       '#mG61Hd button[type="submit"]',
+    //       // Generic form selectors
+    //       'input[type="submit"]',
+    //       'button[type="submit"]',
+    //       'button:not([type])',
+    //       '[role="button"][aria-label*="submit" i]',
+    //       '[role="button"][aria-label*="send" i]',
+    //       'form button[type="submit"]',
+    //       'form input[type="submit"]',
+    //       'form button:last-child',
+    //       '[data-value="Submit"]',
+    //       'button[aria-label*="Submit" i]',
+    //       // More generic selectors
+    //       'button:contains("Submit")',
+    //       'button:contains("Send")',
+    //       'input[value*="Submit" i]',
+    //       'input[value*="Send" i]',
+    //       // Try finding by text content
+    //       'button',
+    //       'input[type="button"]'
+    //     ];
         
-        for (const selector of submitSelectors) {
-          try {
-            const submitButton = iframeDoc.querySelector(selector);
-            if (submitButton && submitButton instanceof HTMLElement) {
-              // Check if it looks like a submit button
-              const text = submitButton.textContent?.toLowerCase() || '';
-              const value = (submitButton as HTMLInputElement).value?.toLowerCase() || '';
-              const ariaLabel = submitButton.getAttribute('aria-label')?.toLowerCase() || '';
+    //     for (const selector of submitSelectors) {
+    //       try {
+    //         const submitButton:HTMLInputElement | null = iframeDoc.querySelector(selector);
+    //         if (submitButton && submitButton instanceof HTMLElement) {
+    //           // Check if it looks like a submit button
+    //           const text = submitButton.textContent?.toLowerCase() || '';
+    //           const value = (submitButton as HTMLInputElement).value?.toLowerCase() || '';
+    //           const ariaLabel = submitButton.getAttribute('aria-label')?.toLowerCase() || '';
               
-              if (text.includes('submit') || text.includes('send') || 
-                  value.includes('submit') || value.includes('send') ||
-                  ariaLabel.includes('submit') || ariaLabel.includes('send') ||
-                  submitButton.type === 'submit' ||
-                  selector.includes('submit') || selector.includes('M2UYVd')) {
-                console.log('✅ Found submit button with selector:', selector);
-                // Try multiple ways to click
-                submitButton.focus();
-                submitButton.click();
-                // Also try mouse events
-                submitButton.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }));
-                submitButton.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true }));
-                submitButton.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
-                // Try keyboard events
-                submitButton.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
-                submitButton.dispatchEvent(new KeyboardEvent('keyup', { key: 'Enter', bubbles: true, cancelable: true }));
-                submitted = true;
-                // Wait a bit to see if it worked
-                await new Promise(resolve => setTimeout(resolve, 300));
-                break;
-              }
-            }
-          } catch (e) {
-            // Continue to next selector
-          }
-        }
+    //           if (text.includes('submit') || text.includes('send') || 
+    //               value.includes('submit') || value.includes('send') ||
+    //               ariaLabel.includes('submit') || ariaLabel.includes('send') ||
+    //               submitButton.type === 'submit' ||
+    //               selector.includes('submit') || selector.includes('M2UYVd')) {
+    //             console.log('✅ Found submit button with selector:', selector);
+    //             // Try multiple ways to click
+    //             submitButton.focus();
+    //             submitButton.click();
+    //             // Also try mouse events
+    //             submitButton.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }));
+    //             submitButton.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true }));
+    //             submitButton.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+    //             // Try keyboard events
+    //             submitButton.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
+    //             submitButton.dispatchEvent(new KeyboardEvent('keyup', { key: 'Enter', bubbles: true, cancelable: true }));
+    //             submitted = true;
+    //             // Wait a bit to see if it worked
+    //             await new Promise(resolve => setTimeout(resolve, 300));
+    //             break;
+    //           }
+    //         }
+    //       } catch (e) {
+    //         // Continue to next selector
+    //       }
+    //     }
         
-        // Strategy 2: Try form.submit() - MOST RELIABLE for Google Forms
-        if (!submitted) {
-          try {
-            const forms = iframeDoc.querySelectorAll('form');
-            for (const form of Array.from(forms)) {
-              try {
-                console.log('✅ Found form, calling submit()');
-                (form as HTMLFormElement).submit();
-                submitted = true;
-                await new Promise(resolve => setTimeout(resolve, 300));
-                break;
-              } catch (e) {
-                // Try next form
-              }
-            }
-          } catch (e) {
-            console.warn('Could not submit form directly:', e);
-          }
-        }
+    //     // Strategy 2: Try form.submit() - MOST RELIABLE for Google Forms
+    //     if (!submitted) {
+    //       try {
+    //         const forms = iframeDoc.querySelectorAll('form');
+    //         for (const form of Array.from(forms)) {
+    //           try {
+    //             console.log('✅ Found form, calling submit()');
+    //             (form as HTMLFormElement).submit();
+    //             submitted = true;
+    //             await new Promise(resolve => setTimeout(resolve, 300));
+    //             break;
+    //           } catch (e) {
+    //             // Try next form
+    //           }
+    //         }
+    //       } catch (e) {
+    //         console.warn('Could not submit form directly:', e);
+    //       }
+    //     }
         
-        // Strategy 3: Try to trigger submit event
-        if (!submitted) {
-          try {
-            const forms = iframeDoc.querySelectorAll('form');
-            for (const form of Array.from(forms)) {
-              try {
-                const submitEvent = new Event('submit', { bubbles: true, cancelable: true });
-                form.dispatchEvent(submitEvent);
-                submitted = true;
-                await new Promise(resolve => setTimeout(resolve, 300));
-                break;
-              } catch (e) {
-                // Try next form
-              }
-            }
-          } catch (e) {
-            console.warn('Could not dispatch submit event');
-          }
-        }
-      } catch (e) {
-        console.warn('Cross-origin restrictions prevent direct access to iframe:', e);
-      }
+    //     // Strategy 3: Try to trigger submit event
+    //     if (!submitted) {
+    //       try {
+    //         const forms = iframeDoc.querySelectorAll('form');
+    //         for (const form of Array.from(forms)) {
+    //           try {
+    //             const submitEvent = new Event('submit', { bubbles: true, cancelable: true });
+    //             form.dispatchEvent(submitEvent);
+    //             submitted = true;
+    //             await new Promise(resolve => setTimeout(resolve, 300));
+    //             break;
+    //           } catch (e) {
+    //             // Try next form
+    //           }
+    //         }
+    //       } catch (e) {
+    //         console.warn('Could not dispatch submit event');
+    //       }
+    //     }
+    //   } catch (e) {
+    //     console.warn('Cross-origin restrictions prevent direct access to iframe:', e);
+    //   }
       
-      // Strategy 4: Post message to iframe (if it supports it)
-      if (!submitted && iframeRef.current.contentWindow) {
-        try {
-          iframeRef.current.contentWindow.postMessage({ type: 'submitForm', action: 'submit' }, '*');
-          console.log('📨 Sent postMessage to iframe');
-          // Give it a moment
-          await new Promise(resolve => setTimeout(resolve, 500));
-          // Assume it worked if we can't verify
-          submitted = true;
-        } catch (e) {
-          console.warn('Could not post message to iframe');
-        }
-      }
-    }
+    //   // Strategy 4: Post message to iframe (if it supports it)
+    //   if (!submitted && iframeRef.current.contentWindow) {
+    //     try {
+    //       iframeRef.current.contentWindow.postMessage({ type: 'submitForm', action: 'submit' }, '*');
+    //       console.log('📨 Sent postMessage to iframe');
+    //       // Give it a moment
+    //       await new Promise(resolve => setTimeout(resolve, 500));
+    //       // Assume it worked if we can't verify
+    //       submitted = true;
+    //     } catch (e) {
+    //       console.warn('Could not post message to iframe');
+    //     }
+    //   }
+    // }
     
     // Log the submission attempt
     fetch('/api/logEvent', {
@@ -1380,7 +1375,7 @@ export default function FormPage() {
                   <button
                     onClick={handleStartQuiz}
                     disabled={cameraPermission !== 'granted' || !facePresent}
-                    className={`px-8 py-3 text-white text-lg font-semibold rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition transform hover:scale-105 ${cameraPermission === 'granted' && facePresent ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-400 cursor-not-allowed'}`}
+                    className={`px-8 py-3 text-white text-lg font-semibold rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition transform hover:scale-105 cursor-pointer ${cameraPermission === 'granted' && facePresent ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-400 cursor-not-allowed'}`}
                   >
                     Start Quiz
                   </button>

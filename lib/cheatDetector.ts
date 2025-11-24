@@ -12,9 +12,9 @@ type Landmark = { x: number; y: number; z?: number };
 export type Rotation = { yaw: number; pitch: number; roll: number; timestamp: number };
 
 function avgPoints(points: Landmark[]) {
-  const s = points.reduce((acc, p) => ({ x: acc.x + p.x, y: acc.y + p.y, z: acc.z + (p.z ?? 0) }), { x: 0, y: 0, z: 0 });
+  const s = points.reduce((acc, p) => ({ x: acc.x + p.x, y: acc.y + p.y, z: acc.z ?? 0 + (p.z ?? 0) }), { x: 0, y: 0, z: 0 });
   const n = points.length || 1;
-  return { x: s.x / n, y: s.y / n, z: s.z / n };
+  return { x: s.x / n, y: s.y / n, z: s.z ?? 0 / n };
 }
 
 // Estimate yaw/pitch/roll (in degrees) from a *single* face's landmarks array.

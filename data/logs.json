@@ -8916,5 +8916,478 @@
     "type": "visibility",
     "hidden": true,
     "time": "2025-11-24T03:20:22.084Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 1,
+    "reason": "look_away",
+    "time": "2025-11-24T03:44:28.202Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 1,
+    "reason": "look_away",
+    "time": "2025-11-24T03:44:28.246Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 2,
+    "reason": "speech_from_iframe",
+    "time": "2025-11-24T03:44:49.662Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 2,
+    "reason": "speech_from_iframe",
+    "time": "2025-11-24T03:44:49.708Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 3,
+    "reason": "fullscreen_exit",
+    "time": "2025-11-24T03:44:53.946Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "quiz_submitted",
+    "violationCount": 0,
+    "submitted": false,
+    "time": "2025-11-24T03:44:53.984Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 3,
+    "reason": "fullscreen_exit",
+    "time": "2025-11-24T03:44:54.041Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "quiz_submitted",
+    "violationCount": 0,
+    "submitted": false,
+    "time": "2025-11-24T03:44:54.074Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "blur",
+    "time": "2025-11-24T03:44:55.357Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "visibility",
+    "hidden": true,
+    "time": "2025-11-24T03:44:55.400Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "visibility",
+    "hidden": false,
+    "time": "2025-11-24T03:45:03.346Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 4,
+    "reason": "focus_loss",
+    "time": "2025-11-24T03:45:03.411Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "quiz_submitted",
+    "violationCount": 0,
+    "submitted": false,
+    "time": "2025-11-24T03:45:03.452Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 4,
+    "reason": "focus_loss",
+    "time": "2025-11-24T03:45:03.483Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "quiz_submitted",
+    "violationCount": 0,
+    "submitted": false,
+    "time": "2025-11-24T03:45:03.518Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 1,
+    "reason": "multi_person",
+    "time": "2025-11-24T03:48:56.032Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 1,
+    "reason": "multi_person",
+    "time": "2025-11-24T03:48:56.061Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "blocked_shortcut",
+    "key": "I",
+    "time": "2025-11-24T03:49:18.158Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 2,
+    "reason": "fullscreen_exit",
+    "time": "2025-11-24T03:49:53.601Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 2,
+    "reason": "fullscreen_exit",
+    "time": "2025-11-24T03:49:53.641Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "blur",
+    "time": "2025-11-24T03:49:58.717Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "visibility",
+    "hidden": true,
+    "time": "2025-11-24T03:49:58.769Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 3,
+    "reason": "tab_switch",
+    "time": "2025-11-24T03:49:58.822Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "quiz_submitted",
+    "violationCount": 0,
+    "submitted": false,
+    "time": "2025-11-24T03:49:58.851Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 3,
+    "reason": "tab_switch",
+    "time": "2025-11-24T03:49:58.885Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "quiz_submitted",
+    "violationCount": 0,
+    "submitted": false,
+    "time": "2025-11-24T03:49:58.917Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "visibility",
+    "hidden": false,
+    "time": "2025-11-24T03:49:59.594Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "blur",
+    "time": "2025-11-24T03:50:01.659Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 4,
+    "reason": "window_blur",
+    "time": "2025-11-24T03:50:01.834Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 4,
+    "reason": "window_blur",
+    "time": "2025-11-24T03:50:01.853Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "quiz_submitted",
+    "violationCount": 0,
+    "submitted": false,
+    "time": "2025-11-24T03:50:01.875Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "quiz_submitted",
+    "violationCount": 0,
+    "submitted": false,
+    "time": "2025-11-24T03:50:01.899Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "visibility",
+    "hidden": true,
+    "time": "2025-11-24T03:50:01.925Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "visibility",
+    "hidden": false,
+    "time": "2025-11-24T03:50:02.536Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "blocked_shortcut",
+    "key": "I",
+    "time": "2025-11-24T03:50:03.304Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "blur",
+    "time": "2025-11-24T03:50:08.887Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 5,
+    "reason": "window_blur",
+    "time": "2025-11-24T03:50:09.121Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "quiz_submitted",
+    "violationCount": 0,
+    "submitted": false,
+    "time": "2025-11-24T03:50:09.154Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 5,
+    "reason": "window_blur",
+    "time": "2025-11-24T03:50:09.193Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "quiz_submitted",
+    "violationCount": 0,
+    "submitted": false,
+    "time": "2025-11-24T03:50:09.261Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "visibility",
+    "hidden": true,
+    "time": "2025-11-24T03:50:23.532Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 6,
+    "reason": "tab_switch",
+    "time": "2025-11-24T03:50:23.572Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "quiz_submitted",
+    "violationCount": 0,
+    "submitted": false,
+    "time": "2025-11-24T03:50:23.606Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 6,
+    "reason": "tab_switch",
+    "time": "2025-11-24T03:50:23.642Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "quiz_submitted",
+    "violationCount": 0,
+    "submitted": false,
+    "time": "2025-11-24T03:50:23.670Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "visibility",
+    "hidden": false,
+    "time": "2025-11-24T03:50:48.425Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "visibility",
+    "hidden": true,
+    "time": "2025-11-24T03:50:50.450Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 1,
+    "reason": "look_away",
+    "time": "2025-11-24T03:52:25.880Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 1,
+    "reason": "look_away",
+    "time": "2025-11-24T03:52:25.898Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 2,
+    "reason": "multi_person",
+    "time": "2025-11-24T03:52:44.089Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 2,
+    "reason": "multi_person",
+    "time": "2025-11-24T03:52:44.119Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 3,
+    "reason": "fullscreen_exit",
+    "time": "2025-11-24T03:53:09.433Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "quiz_submitted",
+    "violationCount": 0,
+    "submitted": false,
+    "time": "2025-11-24T03:53:09.456Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 3,
+    "reason": "fullscreen_exit",
+    "time": "2025-11-24T03:53:09.503Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "quiz_submitted",
+    "violationCount": 0,
+    "submitted": false,
+    "time": "2025-11-24T03:53:09.540Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "blur",
+    "time": "2025-11-24T03:53:11.169Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "visibility",
+    "hidden": true,
+    "time": "2025-11-24T03:53:11.449Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 4,
+    "reason": "focus_loss",
+    "time": "2025-11-24T03:53:11.473Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "quiz_submitted",
+    "violationCount": 0,
+    "submitted": false,
+    "time": "2025-11-24T03:53:11.500Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "violation",
+    "count": 4,
+    "reason": "focus_loss",
+    "time": "2025-11-24T03:53:11.523Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "quiz_submitted",
+    "violationCount": 0,
+    "submitted": false,
+    "time": "2025-11-24T03:53:11.594Z"
+  },
+  {
+    "id": "pwtifwg",
+    "studentEmail": "arpithanayak900@gmail.com",
+    "type": "visibility",
+    "hidden": false,
+    "time": "2025-11-24T03:53:13.814Z"
   }
 ]
