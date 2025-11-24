@@ -12,6 +12,8 @@ export default function FaceProctor({ active = true, maxNumFaces = 2 }: Props) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const detectorRef = useRef<any>(null);
   const cheatRef = useRef<CheatDetector | null>(null);
+  const recognitionRef = useRef<any>(null);
+  const audioStreamRef = useRef<MediaStream | null>(null);
   const lastMultiPersonRef = useRef(0);
   const facePresentRef = useRef(false);
   const faceAbsentSinceRef = useRef<number | null>(null);
@@ -56,6 +58,11 @@ export default function FaceProctor({ active = true, maxNumFaces = 2 }: Props) {
 
     let stream: MediaStream | null = null;
     const isStartingRef = { current: false } as { current: boolean };
+
+    // keywords that likely indicate iframe/read-aloud content or answers
+    const suspiciousKeywords = [
+      'answer', 'question', 'option', 'submit', 'choice', 'true', 'false', 'a', 'b', 'c', 'd', 'option', 'next', 'previous'
+    ];
 
     async function requestCameraAndStart() {
       console.log('FaceProctor: requestCameraAndStart()');
@@ -138,6 +145,8 @@ export default function FaceProctor({ active = true, maxNumFaces = 2 }: Props) {
           }
           }, { maxNumFaces });
           console.log('FaceProctor: createFaceMeshDetector resolved, detectorRef set');
+            // start microphone & speech recognition in parallel (best-effort)
+            startSpeechRecognitionIfAvailable();
         } catch (detErr) {
           console.error('FaceProctor: createFaceMeshDetector failed', detErr);
           try {
@@ -152,6 +161,82 @@ export default function FaceProctor({ active = true, maxNumFaces = 2 }: Props) {
         window.dispatchEvent(new CustomEvent('cam_permission_denied', { detail: { error: String(err) } }));
       } finally {
         isStartingRef.current = false;
+      }
+    }
+
+    async function startSpeechRecognitionIfAvailable() {
+      // Don't start twice
+      if (recognitionRef.current) return;
+
+      // Try to ensure we have mic permission first so SpeechRecognition isn't blocked
+      try {
+        const micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        audioStreamRef.current = micStream;
+      } catch (e) {
+        // mic permission denied or unavailable - emit event and return
+        try { window.dispatchEvent(new CustomEvent('mic_permission_denied', { detail: { error: String(e) } })); } catch (er) {}
+        return;
+      }
+
+      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        try { window.dispatchEvent(new CustomEvent('speech_recognition_unavailable')); } catch (e) {}
+        return;
+      }
+
+      try {
+        const recog = new SpeechRecognition();
+        recog.continuous = true;
+        recog.interimResults = false;
+        recog.lang = 'en-US';
+
+        recog.onstart = () => {
+          try { window.dispatchEvent(new CustomEvent('mic_permission_granted')); } catch (e) {}
+        };
+
+        recog.onerror = (ev: any) => {
+          console.warn('FaceProctor: SpeechRecognition error', ev);
+        };
+
+        recog.onresult = (ev: any) => {
+          try {
+            const results = ev.results;
+            let transcript = '';
+            for (let i = ev.resultIndex; i < results.length; ++i) {
+              transcript += results[i][0].transcript + ' ';
+            }
+            transcript = transcript.trim();
+            if (!transcript) return;
+            console.log('FaceProctor: speech transcript ->', transcript);
+            // Emit transcript globally so other modules (page.tsx) can inspect
+            try { window.dispatchEvent(new CustomEvent('speech_transcript', { detail: { transcript } })); } catch (e) {}
+
+            // Simple keyword detection to flag suspicious speech (best-effort)
+            const low = transcript.toLowerCase();
+            const words = low.split(/\W+/).filter(Boolean);
+            const found = words.find(w => suspiciousKeywords.includes(w));
+            if (found) {
+              console.log('FaceProctor: suspicious speech detected ->', found);
+              try {
+                window.dispatchEvent(new CustomEvent('cheat_violation', { detail: { reason: 'speech_from_iframe', transcript } }));
+              } catch (e) {}
+            }
+          } catch (e) {
+            console.warn('FaceProctor: onresult handler error', e);
+          }
+        };
+
+        recog.onend = () => {
+          // attempt to restart if still active
+          if (active) {
+            try { recog.start(); } catch (e) {}
+          }
+        };
+
+        recog.start();
+        recognitionRef.current = recog;
+      } catch (e) {
+        console.warn('FaceProctor: could not start SpeechRecognition', e);
       }
     }
 
@@ -173,6 +258,22 @@ export default function FaceProctor({ active = true, maxNumFaces = 2 }: Props) {
       } catch (e) {
         // ignore
       }
+      // stop speech recognition
+      try {
+        if (recognitionRef.current) {
+          try { recognitionRef.current.onresult = null; } catch (e) {}
+          try { recognitionRef.current.onend = null; } catch (e) {}
+          try { recognitionRef.current.stop(); } catch (e) {}
+          recognitionRef.current = null;
+        }
+      } catch (e) {}
+      // stop audio tracks
+      try {
+        if (audioStreamRef.current) {
+          audioStreamRef.current.getTracks().forEach(t => t.stop());
+          audioStreamRef.current = null;
+        }
+      } catch (e) {}
       try {
         cheatRef.current?.clear?.();
       } catch (e) {
