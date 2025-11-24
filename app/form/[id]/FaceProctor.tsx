@@ -161,28 +161,69 @@ export default function FaceProctor({ active = true, maxNumFaces = 2 }: Props) {
                 };
 
                 const gaze = estimateGaze(landmarks);
-                // Define permissive boundaries: looking across screen allowed up to ~0.35 horizontally
-                // Relaxed slightly from 0.45 to 0.35 to be more sensitive while avoiding false positives
-                const horizBoundary = 0.35; // normalized units (fraction of eye width)
-                const vertBoundary = 0.6; // vertical boundary is more permissive
+                // Camera / physical assumptions (tweakable)
+                const ASSUMED_IPD_MM = 63; // average interpupillary distance mm
+                const ASSUMED_HFOV_DEG = 64; // assumed horizontal field-of-view of webcam
+                const VIDEO_WIDTH_PX = v.videoWidth || 1280;
+                const VIDEO_HEIGHT_PX = v.videoHeight || 720;
 
-                // Debug: log gaze occasionally
+                // compute observed eye width in pixels
+                const eyeWidthNorm = Math.abs((landmarks[362]?.x ?? 0) - (landmarks[33]?.x ?? 0)) || 0.05; // fallback
+                const eyeWidthPx = eyeWidthNorm * VIDEO_WIDTH_PX;
+
+                // focal length in pixels from HFOV
+                const hfovRad = (ASSUMED_HFOV_DEG * Math.PI) / 180;
+                const focalPx = (VIDEO_WIDTH_PX / 2) / Math.tan(hfovRad / 2);
+
+                // estimate distance from camera (mm) using similar triangles
+                const estimatedDistanceMm = (ASSUMED_IPD_MM * focalPx) / (eyeWidthPx || 1e-6);
+
+                // compute gaze offset in pixels (from eye mid)
+                const eyeMidX = ((landmarks[33]?.x ?? 0) + (landmarks[362]?.x ?? 0)) / 2;
+                const eyeMidY = ((landmarks[159]?.y ?? 0) + (landmarks[386]?.y ?? 0)) / 2;
+                const irisX = (landmarks[468]?.x ?? eyeMidX);
+                const irisY = (landmarks[468]?.y ?? eyeMidY);
+                const dxPx = (irisX - eyeMidX) * VIDEO_WIDTH_PX;
+                const dyPx = (irisY - eyeMidY) * VIDEO_WIDTH_PX; // normalize by width for consistency
+
+                const angleX = Math.atan2(dxPx, focalPx); // radians
+                const angleY = Math.atan2(dyPx, focalPx);
+
+                const lateralMm = Math.tan(angleX) * estimatedDistanceMm;
+                const verticalMm = Math.tan(angleY) * estimatedDistanceMm;
+
+                // Screen physical size: use 14" diagonal from user, assume 16:9 aspect ratio
+                const DIAGONAL_IN = 14;
+                const AR_W = 16;
+                const AR_H = 9;
+                const diagFactor = Math.sqrt(AR_W * AR_W + AR_H * AR_H);
+                const screenWidthIn = (DIAGONAL_IN * AR_W) / diagFactor;
+                const screenHeightIn = (DIAGONAL_IN * AR_H) / diagFactor;
+                const screenHalfWidthMm = (screenWidthIn * 25.4) / 2;
+                const screenHalfHeightMm = (screenHeightIn * 25.4) / 2;
+
+                // Debug: log gaze, distance, and offsets occasionally
                 if (frameCount % 15 === 0) {
                   try {
-                    console.log('FaceProctor: gaze debug ->', { gx: gaze.gx.toFixed(3), gy: gaze.gy.toFixed(3), horizBoundary, vertBoundary });
+                    console.log('FaceProctor: gaze debug ->', {
+                      gx: gaze.gx.toFixed(3), gy: gaze.gy.toFixed(3), eyeWidthPx: Math.round(eyeWidthPx),
+                      estimatedDistanceMm: Math.round(estimatedDistanceMm), lateralMm: Math.round(lateralMm),
+                      screenHalfWidthMm: Math.round(screenHalfWidthMm)
+                    });
                   } catch (e) {}
                 }
 
-                const beyond = Math.abs(gaze.gx) > horizBoundary || Math.abs(gaze.gy) > vertBoundary;
-                if (beyond) {
+                // Determine if gaze points beyond screen boundaries (allow some margin)
+                const marginMm = 40; // allow 40mm margin beyond screen edges
+                const beyondScreen = Math.abs(lateralMm) > (screenHalfWidthMm + marginMm) || Math.abs(verticalMm) > (screenHalfHeightMm + marginMm);
+
+                if (beyondScreen) {
                   if (!gazeAwaySinceRef.current) gazeAwaySinceRef.current = Date.now();
-                  // sustained beyond threshold for > 1200ms => violation
                   if (gazeAwaySinceRef.current && Date.now() - gazeAwaySinceRef.current > 1200) {
-                    // avoid repeating same violation rapidly
                     if (!gazeWarningShownRef.current) {
                       gazeWarningShownRef.current = true;
                       try {
-                        window.dispatchEvent(new CustomEvent('cheat_violation', { detail: { reason: 'gaze_away', gaze } }));
+                        window.dispatchEvent(new CustomEvent('cheat_violation', { detail: { reason: 'gaze_away', gaze, estimatedDistanceMm, lateralMm, verticalMm } }));
                       } catch (e) {}
                     }
                   }
