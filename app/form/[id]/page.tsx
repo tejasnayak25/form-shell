@@ -27,8 +27,101 @@ export default function FormPage() {
   const violationCooldownRef = useRef<number>(2000); // 2 second cooldown between violations
   const containerRef = useRef<HTMLDivElement | null>(null);
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
-  const submitQuizRef = useRef<(() => Promise<void>) | null>(null); // Ref to submit function
   const blockedPostedRef = useRef(false); // Ensure we only post block once per session
+
+  useEffect(() => {
+    // Best-effort: try to disable selection/copy/paste inside the embedded iframe.
+    // Works only for same-origin iframes. If cross-origin, we log and attempt a postMessage
+    // so cooperating providers can opt-in to disabling selection.
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+
+    let mounted = true;
+
+    const configureIframe = () => {
+      if (!mounted || !iframe) return;
+      try {
+        const win = iframe.contentWindow as Window | null;
+        const doc = iframe.contentDocument || win?.document;
+        if (doc && doc.head) {
+          // Inject a style to disable user selection
+          let style = doc.getElementById('disable-selection-style') as HTMLStyleElement | null;
+          if (!style) {
+            style = doc.createElement('style');
+            style.id = 'disable-selection-style';
+            style.textContent = `
+              html, body, * {
+                -webkit-user-select: none !important;
+                -moz-user-select: none !important;
+                -ms-user-select: none !important;
+                user-select: none !important;
+                -webkit-touch-callout: none !important;
+              }
+            `;
+            doc.head.appendChild(style);
+          }
+
+          // Add event listeners inside iframe to block copy/paste/context menu and keyboard shortcuts
+          const onCopy = (e: Event) => {
+            e.preventDefault();
+            try { win?.postMessage({ type: 'blocked_action', action: 'copy' }, '*'); } catch (er) {}
+            return false;
+          };
+          const onCut = (e: Event) => { e.preventDefault(); try { win?.postMessage({ type: 'blocked_action', action: 'cut' }, '*'); } catch (er) {} return false; };
+          const onPaste = (e: Event) => { e.preventDefault(); try { win?.postMessage({ type: 'blocked_action', action: 'paste' }, '*'); } catch (er) {} return false; };
+          const onContext = (e: Event) => { e.preventDefault(); try { win?.postMessage({ type: 'blocked_action', action: 'contextmenu' }, '*'); } catch (er) {} return false; };
+          const onKey = (e: KeyboardEvent) => {
+            const key = e.key.toLowerCase();
+            if ((e.ctrlKey || e.metaKey) && ['c','v','x','a','s','r','u'].includes(key)) {
+              e.preventDefault();
+              e.stopPropagation();
+              try { win?.postMessage({ type: 'blocked_action', action: 'shortcut', key, modifiers: e.ctrlKey ? 'ctrl' : 'meta' }, '*'); } catch (er) {}
+              return false;
+            }
+          };
+
+          // Remove any existing listeners first to avoid duplicates
+          try {
+            doc.removeEventListener('copy', onCopy as EventListener);
+            doc.removeEventListener('cut', onCut as EventListener);
+            doc.removeEventListener('paste', onPaste as EventListener);
+            doc.removeEventListener('contextmenu', onContext as EventListener);
+            doc.removeEventListener('keydown', onKey as any);
+          } catch (e) {}
+
+          doc.addEventListener('copy', onCopy as EventListener, true);
+          doc.addEventListener('cut', onCut as EventListener, true);
+          doc.addEventListener('paste', onPaste as EventListener, true);
+          doc.addEventListener('contextmenu', onContext as EventListener, true);
+          doc.addEventListener('keydown', onKey as any, true);
+
+          console.log('[FaceProctor] injected disable-selection into iframe (same-origin)');
+          return;
+        }
+      } catch (err) {
+        console.warn('[FaceProctor] could not inject into iframe (likely cross-origin):', err);
+      }
+
+      // If we reach here, injection failed (likely cross-origin). Send a postMessage
+      try {
+        iframe.contentWindow?.postMessage({ type: 'disable_selection_request' }, '*');
+        console.log('[FaceProctor] posted disable_selection_request to iframe (cross-origin fallback)');
+      } catch (e) {
+        console.warn('[FaceProctor] postMessage to iframe failed', e);
+      }
+    };
+
+    // Configure when iframe loads and also attempt immediately (if already loaded)
+    iframe.addEventListener('load', configureIframe);
+    setTimeout(configureIframe, 200);
+
+    return () => {
+      mounted = false;
+      try {
+        iframe.removeEventListener('load', configureIframe);
+      } catch (e) {}
+    };
+  }, [link]);
 
   useEffect(() => {
     initFirebaseFromEnv();
@@ -418,13 +511,30 @@ export default function FormPage() {
       // Don't trigger violation on blur if visibilitychange already handled it
       // The cooldown in handleViolation will prevent duplicates
       if (!isSubmitting && !quizSubmitted && !document.hidden) {
-        console.log('⚠️ Window blur event - violation detected');
-        sendEvent({ type: 'blur' });
-        // Use a small delay to avoid duplicate violations
-        if (violationTimeout) clearTimeout(violationTimeout);
-        violationTimeout = setTimeout(() => {
-          handleViolation('window_blur');
-        }, 100);
+        // If focus moved into the quiz iframe (user clicked the form), treat as non-violation.
+        // Use a short timeout to allow document.activeElement to update.
+        const maybeIframe = iframeRef.current;
+        setTimeout(() => {
+          try {
+            if (maybeIframe && document.activeElement === maybeIframe) {
+              // Click into iframe — not a violation
+              console.log('ℹ️ Blur ignored: focus moved into iframe (user click)');
+              return;
+            }
+            console.log('⚠️ Window blur event - violation detected');
+            sendEvent({ type: 'blur' });
+            if (violationTimeout) clearTimeout(violationTimeout);
+            violationTimeout = setTimeout(() => {
+              handleViolation('window_blur');
+            }, 100);
+          } catch (e) {
+            // fallback to original behavior on error
+            if (violationTimeout) clearTimeout(violationTimeout);
+            violationTimeout = setTimeout(() => {
+              handleViolation('window_blur');
+            }, 100);
+          }
+        }, 50);
       }
     }
 
