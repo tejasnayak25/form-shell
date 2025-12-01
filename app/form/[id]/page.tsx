@@ -1425,7 +1425,7 @@ export default function FormPage() {
           </div>
         </header>
 
-        <main className="space-y-8">
+        <main className="md:space-y-8 space-y-4">
           {!userEmail ? (
             <div className="text-center">
               <p className="mb-4 text-base text-gray-600">Please sign in with Google to continue so we can prefill your email into the form.</p>
@@ -1450,7 +1450,7 @@ export default function FormPage() {
               <p className="text-gray-600">Loading form...</p>
             </div>
           ) : showGuidelines ? (
-            <div className="mx-auto max-w-4xl p-8">
+            <div className="mx-auto max-w-4xl md:p-8 p-0">
               <div className="bg-white rounded-lg shadow-lg p-8 space-y-6">
                 <h2 className="text-2xl font-bold text-gray-800 text-center">Quiz Guidelines</h2>
                 <div className="space-y-4">
