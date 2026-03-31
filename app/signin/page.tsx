@@ -1,16 +1,23 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { LogIn } from 'lucide-react';
 
 export default function SignInPage() {
   const router = useRouter();
-  const params = useSearchParams();
-  const redirect = params?.get('redirect') || '/';
+  const [redirect, setRedirect] = useState('/');
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    // Read redirect from the URL on the client to avoid using
+    // `useSearchParams` during server prerender which causes a CSR bailout.
+    try {
+      const params = new URLSearchParams(window.location.search);
+      setRedirect(params.get('redirect') || '/');
+    } catch (e) {
+      // ignore in non-browser environments (defensive)
+    }
     // Lazy-import firebase client helpers so the module isn't required during
     // server-side prerender/build. initFirebaseFromEnv is safe to call in
     // the browser-only effect.
