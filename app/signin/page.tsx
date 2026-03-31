@@ -1,7 +1,8 @@
 "use client";
 
+export const dynamic = 'force-dynamic';
+
 import React, { useEffect, useState } from 'react';
-import { initFirebaseFromEnv, googleSignIn } from '../../lib/firebaseClient';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { LogIn } from 'lucide-react';
 
@@ -12,13 +13,26 @@ export default function SignInPage() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    initFirebaseFromEnv();
+    // Lazy-import firebase client helpers so the module isn't required during
+    // server-side prerender/build. initFirebaseFromEnv is safe to call in
+    // the browser-only effect.
+    import('../../lib/firebaseClient').then(({ initFirebaseFromEnv }) => {
+      try {
+        initFirebaseFromEnv();
+      } catch (e) {
+        // ignore init errors during hydration
+        console.warn('initFirebaseFromEnv failed', e);
+      }
+    }).catch((e) => {
+      console.warn('Failed to load firebase client', e);
+    });
   }, []);
 
   async function handleSignIn() {
     setLoading(true);
     try {
-      await googleSignIn();
+      const m = await import('../../lib/firebaseClient');
+      await m.googleSignIn();
       router.push(redirect);
     } catch (err) {
       console.error('Sign-in failed', err);
