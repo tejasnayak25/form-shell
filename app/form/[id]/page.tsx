@@ -910,14 +910,22 @@ export default function FormPage() {
   async function handleStartQuiz() {
     console.log('▶️ Starting quiz...');
 
-    // Ensure camera permission and face presence before starting
-    if (cameraPermission !== 'granted') {
-      setError('Please allow camera access before starting the quiz.');
-      return;
+    // If proctoring is required, ensure camera/microphone and face presence
+    if (entry?.requireFaceProctor) {
+      if (cameraPermission !== 'granted') {
+        setError('Please allow camera access before starting the quiz.');
+        return;
+      }
+      if (!facePresent) {
+        setError('No face detected. Please position your face in front of the camera before starting.');
+        return;
+      }
     }
-    if (!facePresent) {
-      setError('No face detected. Please position your face in front of the camera before starting.');
-      return;
+    if (entry?.requireVoiceProctor) {
+      if (micPermission !== 'granted') {
+        setError('Please allow microphone access before starting the quiz.');
+        return;
+      }
     }
     
     // Set grace period flag and time to ignore violations during fullscreen transition
