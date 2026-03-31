@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { initFirebaseFromEnv, googleSignIn, onAuthChange } from '../../lib/firebaseClient';
-import { Check, Copy, ExternalLink, LayoutGrid, Link, LogIn, X, Loader2 } from 'lucide-react';
+import { initFirebaseFromEnv, onAuthChange } from '../../lib/firebaseClient';
+import NextLink from 'next/link';
+import { Check, Copy, ExternalLink, LayoutGrid, Link, LogIn, X, Loader2, Info } from 'lucide-react';
 
 // Loading animation component
 function LoadingSpinner() {
@@ -45,6 +46,8 @@ export default function TeacherPage() {
     initFirebaseFromEnv();
   }, []);
   const [input, setInput] = useState('');
+  const [requireFaceProctor, setRequireFaceProctor] = useState(true);
+  const [requireVoiceProctor, setRequireVoiceProctor] = useState(false);
   const [result, setResult] = useState<null | { id: string; url: string }>(null);
   const [error, setError] = useState<string | null>(null);
   const [showErrorPopup, setShowErrorPopup] = useState(false);
@@ -73,7 +76,7 @@ export default function TeacherPage() {
     setIsLoading(true);
     
     try {
-      const payload: any = { input };
+      const payload: any = { input, requireFaceProctor, requireVoiceProctor };
       if (user?.email) payload.teacher = user.email;
       
       const res = await fetch('/api/createLink', {
@@ -175,15 +178,52 @@ export default function TeacherPage() {
               placeholder="Paste iframe embed code or a direct URL"
               className="w-full h-40 p-4 rounded-lg border border-gray-300 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:bg-white text-gray-800 placeholder:text-gray-400 text-sm"
             />
-            <div className="mt-4 flex items-center gap-4">
+              <div className="mt-4 flex flex-col gap-3">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <label className="flex items-center gap-3">
+                  <div className="flex flex-col">
+                    <span className="text-sm font-medium text-gray-800">Require face detection</span>
+                    <span className="text-xs text-gray-500">Ask students to allow camera; detects presence and gaze.</span>
+                  </div>
+                  <button
+                    aria-pressed={requireFaceProctor}
+                    onClick={() => setRequireFaceProctor(!requireFaceProctor)}
+                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ml-3 ${requireFaceProctor ? 'bg-blue-600' : 'bg-gray-300'}`}
+                    title="Require students to enable face proctoring"
+                  >
+                    <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${requireFaceProctor ? 'translate-x-6' : 'translate-x-1'}`} />
+                  </button>
+                  <Info className="w-4 h-4 text-gray-400 ml-2" title="Face detection uses the webcam to ensure the student is present during the quiz" />
+                </label>
+
+                <label className="flex items-center gap-3">
+                  <div className="flex flex-col">
+                    <span className="text-sm font-medium text-gray-800">Require voice detection</span>
+                    <span className="text-xs text-gray-500">Optional: monitors microphone for suspicious speech.</span>
+                  </div>
+                  <button
+                    aria-pressed={requireVoiceProctor}
+                    onClick={() => setRequireVoiceProctor(!requireVoiceProctor)}
+                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ml-3 ${requireVoiceProctor ? 'bg-blue-600' : 'bg-gray-300'}`}
+                    title="Require students to enable voice proctoring"
+                  >
+                    <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${requireVoiceProctor ? 'translate-x-6' : 'translate-x-1'}`} />
+                  </button>
+                  <Info className="w-4 h-4 text-gray-400 ml-2" title="Voice detection listens for suspicious keywords or external audio" />
+                </label>
+              </div>
+              <div className="text-xs text-gray-500">
+                Choose whether this link should require camera or microphone access. These settings are saved with the generated link.
+              </div>
+              <div className="flex items-center gap-4">
               {!user ? (
-                <button
-                  onClick={() => googleSignIn()}
+                <NextLink
+                  href={`/signin?redirect=${encodeURIComponent('/teacher')}`}
                   className="flex justify-center items-center gap-1.5 px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-400"
                 >
                   <LogIn className='w-5'/>
-                  Sign in with Google
-                </button>
+                  Sign in
+                </NextLink>
               ) : (
                 <button
                   onClick={createLink}
@@ -204,6 +244,7 @@ export default function TeacherPage() {
                 </button>
               )}
               {error && <div className="text-red-600 text-sm">{error}</div>}
+              </div>
             </div>
           </div>
 

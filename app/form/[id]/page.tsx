@@ -1,13 +1,16 @@
 "use client";
 import { useParams } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
-import { initFirebaseFromEnv, googleSignIn, onAuthChange } from '../../../lib/firebaseClient';
+import { initFirebaseFromEnv, onAuthChange } from '../../../lib/firebaseClient';
+import NextLink from 'next/link';
 import FaceProctor from './FaceProctor';
 
 export default function FormPage() {
   const { id } = useParams() as { id?: string };
   const [link, setLink] = useState<string | null>(null);
+  const [entry, setEntry] = useState<any | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [micPermission, setMicPermission] = useState<'unknown' | 'granted' | 'denied'>('unknown');
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [isBlocked, setIsBlocked] = useState(false);
   const [blockedChecked, setBlockedChecked] = useState(false);
@@ -164,16 +167,27 @@ export default function FormPage() {
       setFacePresent(false);
     };
 
+    const micGranted = () => {
+      setMicPermission('granted');
+    };
+    const micDenied = () => {
+      setMicPermission('denied');
+    };
+
     window.addEventListener('cam_permission_granted', camGranted as EventListener);
     window.addEventListener('cam_permission_denied', camDenied as EventListener);
     window.addEventListener('face_present', onFacePresent as EventListener);
     window.addEventListener('face_absent', onFaceAbsent as EventListener);
+    window.addEventListener('mic_permission_granted', micGranted as EventListener);
+    window.addEventListener('mic_permission_denied', micDenied as EventListener);
 
     return () => {
       window.removeEventListener('cam_permission_granted', camGranted as EventListener);
       window.removeEventListener('cam_permission_denied', camDenied as EventListener);
       window.removeEventListener('face_present', onFacePresent as EventListener);
       window.removeEventListener('face_absent', onFaceAbsent as EventListener);
+      window.removeEventListener('mic_permission_granted', micGranted as EventListener);
+      window.removeEventListener('mic_permission_denied', micDenied as EventListener);
     };
   }, []);
 
@@ -341,6 +355,7 @@ export default function FormPage() {
           setError('Link not found or invalid');
         return;
       }
+      setEntry(entry);
 
       let finalUrl = entry.url as string;
       if (userEmail) {
@@ -1390,7 +1405,9 @@ export default function FormPage() {
         />
         {/* Client-side proctoring: hidden video + mediapipe detector (mounted once at page bottom) */}
         {/* Keep the proctor mounted while the quiz is shown so camera stays active */}
-        <FaceProctor active={true} maxNumFaces={2} />
+        {(entry?.requireFaceProctor || entry?.requireVoiceProctor) && (
+          <FaceProctor active={true} maxNumFaces={2} enableFace={!!entry?.requireFaceProctor} enableVoice={!!entry?.requireVoiceProctor} />
+        )}
 
         <style jsx>{`
           @keyframes popupFadeIn {
@@ -1429,12 +1446,12 @@ export default function FormPage() {
           {!userEmail ? (
             <div className="text-center">
               <p className="mb-4 text-base text-gray-600">Please sign in with Google to continue so we can prefill your email into the form.</p>
-              <button
-                onClick={() => googleSignIn()}
+              <NextLink
+                href={`/signin?redirect=${encodeURIComponent(`/form/${id || ''}`)}`}
                 className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-400"
               >
-                Sign in with Google
-              </button>
+                Sign in
+              </NextLink>
             </div>
           ) : error ? (
             <div className="mx-auto max-w-4xl p-8">
@@ -1465,7 +1482,9 @@ export default function FormPage() {
                       <li>Right-click context menu is disabled</li>
                       <li>The form will be automatically submitted if you switch tabs or lose focus</li>
                       <li>Ensure you have a stable internet connection</li>
-                      <li>Ensure your face is visible to the camera — camera access is required</li>
+                      {entry?.requireFaceProctor && (
+                        <li>Ensure your face is visible to the camera — camera access is required</li>
+                      )}
                       <li>Read all questions carefully before answering</li>
                       <li>Complete the form within the allotted time</li>
                     </ul>
@@ -1477,15 +1496,35 @@ export default function FormPage() {
                   </div>
                 </div>
                 <div className="flex flex-col items-center pt-4">
-                  <div className="text-sm text-gray-600 mb-2">
-                    Camera: <strong className="ml-1">{cameraPermission === 'granted' ? 'Allowed' : cameraPermission === 'denied' ? 'Denied' : 'Not granted'}</strong>
-                    <span className="mx-3">•</span>
-                    Face: <strong className="ml-1">{facePresent ? 'Detected' : 'Not detected'}</strong>
+                  <div className="text-sm text-gray-600 mb-2 flex flex-col sm:flex-row sm:items-center sm:gap-4">
+                    {entry?.requireFaceProctor ? (
+                      <div className="flex items-center gap-3">
+                        <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ${cameraPermission === 'granted' ? 'bg-green-100 text-green-800' : cameraPermission === 'denied' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800'}`}>
+                          Camera: {cameraPermission === 'granted' ? 'Allowed' : cameraPermission === 'denied' ? 'Denied' : 'Not granted'}
+                        </span>
+                        <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ${facePresent ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                          Face: {facePresent ? 'Detected' : 'Not detected'}
+                        </span>
+                      </div>
+                    ) : (
+                      <div className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-700">Face proctor: disabled</div>
+                    )}
+
+                    {entry?.requireVoiceProctor && (
+                      <div className="mt-2 sm:mt-0">
+                        <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ${micPermission === 'granted' ? 'bg-green-100 text-green-800' : micPermission === 'denied' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800'}`}>
+                          Microphone: {micPermission === 'granted' ? 'Allowed' : micPermission === 'denied' ? 'Denied' : 'Not granted'}
+                        </span>
+                      </div>
+                    )}
                   </div>
                   <button
                     onClick={handleStartQuiz}
-                    disabled={cameraPermission !== 'granted' || !facePresent}
-                    className={`px-8 py-3 text-white text-lg font-semibold rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition transform hover:scale-105 cursor-pointer ${cameraPermission === 'granted' && facePresent ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-400 cursor-not-allowed'}`}
+                    disabled={
+                      (entry?.requireFaceProctor ? (cameraPermission !== 'granted' || !facePresent) : false) ||
+                      (entry?.requireVoiceProctor ? micPermission !== 'granted' : false)
+                    }
+                    className={`px-8 py-3 text-white text-lg font-semibold rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition transform hover:scale-105 cursor-pointer ${(!entry?.requireFaceProctor || (cameraPermission === 'granted' && facePresent)) && (!entry?.requireVoiceProctor || micPermission === 'granted') ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-400 cursor-not-allowed'}`}
                   >
                     Start Quiz
                   </button>
@@ -1510,7 +1549,9 @@ export default function FormPage() {
           © 2025 Form Shell. All rights reserved.
         </footer>
         {/* Mount proctor during guidelines and quiz so camera is requested early */}
-        <FaceProctor active={showGuidelines || quizStarted} maxNumFaces={2} />
+        {(entry?.requireFaceProctor || entry?.requireVoiceProctor) && (
+          <FaceProctor active={showGuidelines || quizStarted} maxNumFaces={2} enableFace={!!entry?.requireFaceProctor} enableVoice={!!entry?.requireVoiceProctor} />
+        )}
       </div>
     </div>
   );

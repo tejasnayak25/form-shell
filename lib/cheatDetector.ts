@@ -12,9 +12,12 @@ type Landmark = { x: number; y: number; z?: number };
 export type Rotation = { yaw: number; pitch: number; roll: number; timestamp: number };
 
 function avgPoints(points: Landmark[]) {
-  const s = points.reduce((acc, p) => ({ x: acc.x + p.x, y: acc.y + p.y, z: acc.z ?? 0 + (p.z ?? 0) }), { x: 0, y: 0, z: 0 });
+  const s = points.reduce(
+    (acc, p) => ({ x: acc.x + p.x, y: acc.y + p.y, z: (acc.z ?? 0) + (p.z ?? 0) }),
+    { x: 0, y: 0, z: 0 }
+  );
   const n = points.length || 1;
-  return { x: s.x / n, y: s.y / n, z: s.z ?? 0 / n };
+  return { x: s.x / n, y: s.y / n, z: (s.z ?? 0) / n };
 }
 
 // Estimate yaw/pitch/roll (in degrees) from a *single* face's landmarks array.
@@ -60,6 +63,10 @@ export class CheatDetector {
   private yawThreshold = 25; // degrees to consider 'looking away'
   private nodThreshold = 15; // degrees change in pitch considered a nod
   private nodWindowMs = 1200; // time window to interpret repeated nods
+  private lookAwayCooldownMs = 1500;
+  private nodCooldownMs = 1500;
+  private lastLookAwayTs = 0;
+  private lastNodTs = 0;
 
   onLookAway?: (rot: Rotation) => void;
   onNod?: (rot: Rotation) => void;
@@ -69,6 +76,10 @@ export class CheatDetector {
     if (opts?.yawThreshold) this.yawThreshold = opts.yawThreshold;
     if (opts?.nodThreshold) this.nodThreshold = opts.nodThreshold;
     if (opts?.nodWindowMs) this.nodWindowMs = opts.nodWindowMs;
+    // optional cooldowns
+    // @ts-ignore allow passing extra options without creating a new type
+    if ((opts as any)?.lookAwayCooldownMs) this.lookAwayCooldownMs = (opts as any).lookAwayCooldownMs;
+    if ((opts as any)?.nodCooldownMs) this.nodCooldownMs = (opts as any).nodCooldownMs;
   }
 
   push(rot: Rotation) {
@@ -79,7 +90,9 @@ export class CheatDetector {
   }
 
   private checkLookAway(rot: Rotation) {
-    if (Math.abs(rot.yaw) > this.yawThreshold) {
+    const now = Date.now();
+    if (Math.abs(rot.yaw) > this.yawThreshold && now - this.lastLookAwayTs > this.lookAwayCooldownMs) {
+      this.lastLookAwayTs = now;
       this.onLookAway?.(rot);
     }
   }
@@ -95,7 +108,8 @@ export class CheatDetector {
       const d = Math.abs(window[i].pitch - window[i - 1].pitch);
       if (d > maxDelta) maxDelta = d;
     }
-    if (maxDelta > this.nodThreshold) {
+    if (maxDelta > this.nodThreshold && now - this.lastNodTs > this.nodCooldownMs) {
+      this.lastNodTs = now;
       this.onNod?.(rot);
     }
   }

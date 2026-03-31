@@ -6,7 +6,7 @@ import path from 'path';
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { input, teacher } = body as { input: string; teacher?: string; };
+    const { input, teacher, requireFaceProctor, requireVoiceProctor } = body as { input: string; teacher?: string; requireFaceProctor?: boolean; requireVoiceProctor?: boolean };
 
     const extracted = extractUrlFromEmbed(input);
     if (!extracted) {
@@ -20,6 +20,8 @@ export async function POST(req: NextRequest) {
       url: extracted,
       teacher: teacher,
       createdAt: new Date().toISOString(),
+      requireFaceProctor: !!requireFaceProctor,
+      requireVoiceProctor: !!requireVoiceProctor,
     };
 
     // Try Firebase first, fallback to JSON file

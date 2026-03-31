@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from 'react';
-import { initFirebaseFromEnv, googleSignIn, onAuthChange, signOut } from '../../../lib/firebaseClient';
+import { initFirebaseFromEnv, onAuthChange, signOut } from '../../../lib/firebaseClient';
 import { Check, Copy, ExternalLink, LogIn, Plus, Trash2, Mail, Ban, MailXIcon, LogOut } from "lucide-react";
+import NextLink from 'next/link';
 
 function formatDate(iso?: string) {
   if (!iso) return '-';
@@ -223,13 +224,13 @@ export default function TeacherDashboard() {
           </div>
           <div className="flex items-center gap-5">
             {!user ? (
-              <button
-                onClick={() => googleSignIn()}
+              <NextLink
+                href={`/signin?redirect=${encodeURIComponent('/teacher/dashboard')}`}
                 className="flex justify-center items-center gap-1.5 px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-400"
               >
                 <LogIn className='w-5'/>
-                Sign in with Google
-              </button>
+                Sign in
+              </NextLink>
             ) : (
               <button
                 onClick={() => signOut()}
