@@ -193,7 +193,7 @@ export default function TeacherPage() {
                   >
                     <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${requireFaceProctor ? 'translate-x-6' : 'translate-x-1'}`} />
                   </button>
-                  <Info className="w-4 h-4 text-gray-400 ml-2" title="Face detection uses the webcam to ensure the student is present during the quiz" />
+                  <Info className="w-4 h-4 text-gray-400 ml-2" aria-label="Face detection uses the webcam to ensure the student is present during the quiz" role="img" />
                 </label>
 
                 <label className="flex items-center gap-3">
@@ -209,7 +209,7 @@ export default function TeacherPage() {
                   >
                     <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${requireVoiceProctor ? 'translate-x-6' : 'translate-x-1'}`} />
                   </button>
-                  <Info className="w-4 h-4 text-gray-400 ml-2" title="Voice detection listens for suspicious keywords or external audio" />
+                  <Info className="w-4 h-4 text-gray-400 ml-2" aria-label="Voice detection listens for suspicious keywords or external audio" role="img" />
                 </label>
               </div>
               <div className="text-xs text-gray-500">
